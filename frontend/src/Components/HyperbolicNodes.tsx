@@ -6,6 +6,7 @@ import {
     type Mat4, type Vec3, identity, mul, ballToHyperboloid,
     applyToBall, translateBall, focusStep, viewOffset,
 } from "../hyperbolic";
+import { PointLayers } from "./PointLayers";
 
 /** Imperative handle for the surrounding UI (reset button, tooltips, ...). */
 export interface HyperbolicViewApi {
@@ -217,15 +218,18 @@ export default function HyperbolicNodes({
 
     return (
         <>
-            {states.map((state, i) => (
-                <Point
-                    key={i}
-                    state={state}
-                    scale={nodeScale * radius}
-                    isHockey={isHockey[i] ?? false}
-                    onClick={(e) => onSelect(i, e)}
-                />
-            ))}
+            <PointLayers>
+                {states.map((state, i) => (
+                    <Point
+                        key={i}
+                        state={state}
+                        scale={nodeScale * radius}
+                        isHockey={isHockey[i] ?? false}
+                        onClick={(e) => onSelect(i, e)}
+                    />
+                ))}
+            </PointLayers>
+
         </>
     );
 }
