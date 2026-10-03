@@ -21,6 +21,12 @@ Put `basketball.json` and `baseball.json` in `data/`, then seed the database:
 python -m app.scripts.seed
 ```
 
+## Analyze the data'
+
+```bash
+python -m app.scripts.compute
+```
+
 Safe to rerun: existing players are updated, not duplicated.
 
 ## Run the server
