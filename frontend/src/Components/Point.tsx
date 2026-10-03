@@ -1,6 +1,6 @@
 // Components/Point.tsx
 import { useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, type ThreeEvent } from "@react-three/fiber";
 import * as THREE from "three";
 
 export interface PointState {
@@ -15,6 +15,8 @@ interface PointProps {
     scale?: number;
     /** true = red (baseball), false = green (basketball) */
     isBaseball?: boolean;
+    /** Fired on click (the caller decides whether it was really a click). */
+    onClick?: (e: ThreeEvent<PointerEvent>) => void;
 }
 
 const RED = "#ff3b4e";
@@ -51,6 +53,7 @@ export default function Point({
     state,
     scale = 1,
     isBaseball = false,
+    onClick,
 }: PointProps) {
     const group = useRef<THREE.Group>(null!);
 
@@ -75,7 +78,7 @@ export default function Point({
     return (
         <group ref={group}>
             {/* Core: glossy, slightly self-lit sphere */}
-            <mesh geometry={sphereGeometry}>
+            <mesh geometry={sphereGeometry} onClick={onClick}>
                 <meshPhysicalMaterial
                     color={color}
                     emissive={color}

@@ -16,6 +16,9 @@ export function mul(a: Mat4, b: Mat4): Mat4 {
     return out;
 }
 
+/** Smallest radius we ever let a projected point take, to stay off the ideal boundary. */
+export const MAX_BALL_R = 1 - 1e-9;
+
 /** Poincaré ball -> hyperboloid (x0 is the "time" coordinate) */
 export function ballToHyperboloid(p: Vec3): Vec4 {
     const s = p[0] * p[0] + p[1] * p[1] + p[2] * p[2];
@@ -33,7 +36,27 @@ export function applyToBall(m: Mat4, h: Vec4, out: Vec3): Vec3 {
     out[0] = x1 * k;
     out[1] = x2 * k;
     out[2] = x3 * k;
+    // Points pushed very close to the rim can round past |p| = 1 in float64.
+    // Clamp so downstream b2h() never divides by a non-positive value.
+    const len = Math.hypot(out[0], out[1], out[2]);
+    if (len > MAX_BALL_R) {
+        const s = MAX_BALL_R / len;
+        out[0] *= s;
+        out[1] *= s;
+        out[2] *= s;
+    }
     return out;
+}
+
+/**
+ * Hyperbolic distance the view origin has moved away from the league average.
+ * The origin's hyperboloid image is the first column of `m`, whose time
+ * component is cosh(distance). 0 means "league-average view" (identity).
+ */
+export function viewOffset(m: Mat4): number {
+    const t = m[0];
+    if (!Number.isFinite(t) || t < 1) return Number.POSITIVE_INFINITY;
+    return Math.acosh(t);
 }
 
 /** Pure translation (boost) that moves the origin to hyperboloid point h */

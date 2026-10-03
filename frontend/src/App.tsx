@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import Point, { type PointState } from "./Components/Point";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { PoincareBoundary } from "./Components/PoincareBoundary";
 import Legend from "./Components/Legend";
-import HyperbolicNodes from "./Components/HyperbolicNodes";
+import HyperbolicNodes, { type HyperbolicViewApi } from "./Components/HyperbolicNodes";
+import BoundaryAxes from "./Components/BoundaryAxes";
 import type { Vec3 } from "./hyperbolic";
 
 const examplePoints = [
@@ -38,57 +39,62 @@ const examplePoints = [
     [-0.455, 0.324, -0.498],
     [0.119, -0.082, -0.176],
     [0.581, -0.119, 0.402],
-    [-0.226, -0.488, 0.341]
-] as Vec3[]
+    [-0.226, -0.488, 0.341],
+] as Vec3[];
 
-const flags = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-]
+const flags = examplePoints.map(() => true);
 
-const POINCARE_RADIUS = 3.0
+const POINCARE_RADIUS = 3.0;
+const CAMERA_FOV = 50;
+/**
+ * The axes reach ~1.6x radius including their labels, so the camera has to sit
+ * far enough back that all of it fits inside the vertical field of view:
+ * distance >= extent / sin(fov / 2).
+ */
+const CAMERA_DISTANCE = (POINCARE_RADIUS * 1.65) / Math.sin((CAMERA_FOV / 2) * (Math.PI / 180));
+const CAMERA_POSITION: Vec3 = [CAMERA_DISTANCE, CAMERA_DISTANCE, CAMERA_DISTANCE]
+    .map((v) => v / Math.sqrt(3)) as Vec3;
 
 export default function App() {
+    const view = useRef<HyperbolicViewApi>(null);
+
     return (
-        <div>
-            <Canvas camera={{ position: [0, 0, 5] }} style={{ width: "100vw", height: "100vh" }}>
+        <div className="relative h-screen w-screen touch-none overflow-hidden select-none">
+            <Canvas
+                camera={{ position: CAMERA_POSITION, fov: CAMERA_FOV }}
+                onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
+            >
                 <ambientLight intensity={0.5} />
-                <color attach="background" args={['#05060f']} />
+                <color attach="background" args={["#05060f"]} />
+
                 <PoincareBoundary radius={POINCARE_RADIUS} />
-                <HyperbolicNodes positions={examplePoints} isBaseball={flags} radius={POINCARE_RADIUS} />
+                <HyperbolicNodes
+                    positions={examplePoints}
+                    isBaseball={flags}
+                    radius={POINCARE_RADIUS}
+                    apiRef={view}
+                />
+                <BoundaryAxes radius={POINCARE_RADIUS} view={view} />
+
+                <EffectComposer>
+                    <Bloom luminanceThreshold={0.2} mipmapBlur />
+                </EffectComposer>
             </Canvas>
+
+            <div className="absolute top-3 right-3 z-10 flex flex-col items-end gap-2">
+                <button
+                    type="button"
+                    onClick={() => view.current?.reset()}
+                    className="rounded-md border border-white/20 bg-slate-800/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur transition-colors hover:bg-slate-700 active:bg-slate-600"
+                >
+                    Reset view
+                </button>
+                <p className="max-w-52 text-right text-[11px] leading-snug text-slate-400">
+                    Drag to pan &middot; click a player to re-center
+                </p>
+            </div>
+
             <Legend />
         </div>
-
     );
 }

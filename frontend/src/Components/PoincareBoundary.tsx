@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
@@ -67,8 +67,6 @@ export function PoincareBoundary({
     graticule = true,
     graticuleOpacity = 0.08,
 }: PoincareBoundaryProps) {
-    const matRef = useRef<THREE.ShaderMaterial>(null)
-
     const uniforms = useMemo(
         () => ({
             uColor: { value: new THREE.Color(color) },
@@ -77,17 +75,12 @@ export function PoincareBoundary({
             uTime: { value: 0 },
             uShimmer: { value: shimmer },
         }),
-        []
+        [color, power, intensity, shimmer]
     )
 
-    useEffect(() => {
-        uniforms.uColor.value.set(color)
-        uniforms.uPower.value = power
-        uniforms.uIntensity.value = intensity
-        uniforms.uShimmer.value = shimmer
-    }, [color, power, intensity, shimmer, uniforms])
-
     useFrame((_, dt) => {
+        // Nothing animates when the shimmer is switched off.
+        if (uniforms.uShimmer.value === 0) return
         uniforms.uTime.value += dt
     })
 
@@ -96,7 +89,6 @@ export function PoincareBoundary({
             <mesh>
                 <sphereGeometry args={[1, 128, 128]} />
                 <shaderMaterial
-                    ref={matRef}
                     vertexShader={vertexShader}
                     fragmentShader={fragmentShader}
                     uniforms={uniforms}
