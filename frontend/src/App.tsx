@@ -8,6 +8,7 @@ import BoundaryAxes from "./Components/BoundaryAxes";
 import type { Vec3 } from "./hyperbolic";
 import { MOUSE } from "three";
 import { OrbitControls } from "@react-three/drei";
+import Tooltip from "./Components/Tooltip";
 
 const examplePoints = [
     [0.627, 0.119, 0.448],
@@ -103,8 +104,11 @@ export default function App() {
                     Hold right-click to pan &middot; click a player to re-center
                 </p>
             </div>
+            <div className="absolute top-2 left-2 flex flex-col gap-2">
+                <Legend />
+                <Tooltip />
+            </div>
 
-            <Legend />
         </div>
     );
 }
