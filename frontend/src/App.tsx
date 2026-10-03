@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { PoincareBoundary } from "./Components/PoincareBoundary";
@@ -20,7 +20,7 @@ export const examplePlayers: PlayerPoint[] = [
     { position: [0.08, -0.119, 0.04], name: "Liam O'Connor", sport: "Hockey", age: 24, weight_lbs: 172, height_in: 70, dominant_hand: "right", offense_pct: 54, defense_pct: 44, physical_pct: 52 },
     { position: [0.419, 0.384, -0.14], name: "Aiden Park", sport: "Basketball", age: 27, weight_lbs: 190, height_in: 73, dominant_hand: "right", offense_pct: 71, defense_pct: 69, physical_pct: 43 },
     { position: [-0.547, -0.456, -0.274], name: "Jordan Ellis", sport: "Basketball", age: 31, weight_lbs: 168, height_in: 71, dominant_hand: "left", offense_pct: 23, defense_pct: 27, physical_pct: 36 },
-    { position: [0.0, 0.0, 0.0], name: "Sam Rivera", sport: "Basketball", age: 25, weight_lbs: 195, height_in: 75, dominant_hand: "right", offense_pct: 50, defense_pct: 50, physical_pct: 50 },
+    { position: [0.0, 0.0, 0.0], name: "John Average", sport: "Basketball", age: 25, weight_lbs: 195, height_in: 75, dominant_hand: "right", offense_pct: 50, defense_pct: 50, physical_pct: 50 },
     { position: [0.763, -0.327, 0.163], name: "Dante Brooks", sport: "Basketball", age: 23, weight_lbs: 198, height_in: 72, dominant_hand: "right", offense_pct: 88, defense_pct: 34, physical_pct: 58 },
     { position: [-0.243, 0.274, 0.669], name: "Viktor Petrov", sport: "Hockey", age: 30, weight_lbs: 224, height_in: 77, dominant_hand: "left", offense_pct: 38, defense_pct: 64, physical_pct: 83 },
     { position: [0.196, -0.554, -0.359], name: "Kenji Tanaka", sport: "Hockey", age: 28, weight_lbs: 180, height_in: 70, dominant_hand: "right", offense_pct: 60, defense_pct: 22, physical_pct: 32 },
@@ -67,6 +67,16 @@ const CAMERA_POSITION: Vec3 = [CAMERA_DISTANCE, CAMERA_DISTANCE + 3, CAMERA_DIST
 
 export default function App() {
     const view = useRef<HyperbolicViewApi>(null);
+    const [player, setPlayer] = useState<PlayerData | null>(null);
+
+    const onSelect = useCallback((index: number) => {
+        setPlayer(examplePlayers[index] ?? null);
+    }, []);
+
+    const reset = useCallback(() => {
+        view.current?.reset();
+        setPlayer(null);
+    }, []);
 
     return (
         <div className="relative h-screen w-screen touch-none overflow-hidden select-none">
@@ -91,6 +101,7 @@ export default function App() {
                     isHockey={isHockeyFlags}
                     radius={POINCARE_RADIUS}
                     apiRef={view}
+                    onSelect={onSelect}
                 />
                 <BoundaryAxes radius={POINCARE_RADIUS} view={view} />
 
@@ -102,7 +113,7 @@ export default function App() {
             <div className="absolute top-3 right-3 z-10 flex flex-col items-end gap-2">
                 <button
                     type="button"
-                    onClick={() => view.current?.reset()}
+                    onClick={reset}
                     className="rounded-md border border-white/20 bg-slate-800/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur transition-colors hover:bg-slate-700 active:bg-slate-600"
                 >
                     Reset view
@@ -113,7 +124,7 @@ export default function App() {
             </div>
             <div className="absolute top-2 left-2 flex flex-col gap-2">
                 <Legend />
-                <Tooltip />
+                <Tooltip player={player} />
             </div>
 
         </div>

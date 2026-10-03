@@ -1,5 +1,3 @@
-import { useRef } from "react"
-
 export interface PlayerData {
     name: string
     sport: string
@@ -10,6 +8,11 @@ export interface PlayerData {
     offense_pct: number
     defense_pct: number
     physical_pct: number
+}
+
+interface Props {
+    /** The selected player, or null when nothing is selected. */
+    player: PlayerData | null;
 }
 
 function formatInches(inches: number): string {
@@ -27,10 +30,8 @@ function percentageBackground(percentage: number): string {
     return "bg-blue-500"
 }
 
-export default function Tooltip() {
-    const playerDataRef = useRef<PlayerData>(null!);
-
-    if (playerDataRef.current === null) {
+export default function Tooltip({ player }: Props) {
+    if (player === null) {
         return (
             <div className="z-50 text-white max-w-90 p-4 bg-slate-800 rounded-md">
                 <h1>No node selected</h1>
@@ -40,24 +41,24 @@ export default function Tooltip() {
 
     return (
         <div className="z-50 text-white max-w-90 p-4 bg-slate-800 rounded-md">
-            <h1 className="text-lg font-bold">{playerDataRef.current.name}</h1>
-            <p className="text-sm">{playerDataRef.current.sport} &#x2022; Age: {playerDataRef.current.age} &#x2022; {formatInches(playerDataRef.current.height_in)} &#x2022; {playerDataRef.current.weight_lbs} lbs</p>
+            <h1 className="text-lg font-bold">{player.name}</h1>
+            <p className="text-sm">{player.sport} &#x2022; Age: {player.age} &#x2022; {formatInches(player.height_in)} &#x2022; {player.weight_lbs} lbs</p>
             <div className="grid grid-cols-3 gap-2 mt-3">
                 <div className="flex flex-col items-center">
-                    <div className={`p-2 ${percentageBackground(playerDataRef.current.offense_pct)} text-white aspect-square flex items-center justify-center`}>
-                        <span className="text-2xl font-bold">{playerDataRef.current.offense_pct}%</span>
+                    <div className={`p-2 ${percentageBackground(player.offense_pct)} text-white aspect-square flex items-center justify-center`}>
+                        <span className="text-2xl font-bold">{player.offense_pct}%</span>
                     </div>
                     <p>Offense</p>
                 </div>
                 <div className="flex flex-col items-center">
-                    <div className={`p-2 ${percentageBackground(playerDataRef.current.defense_pct)} text-white aspect-square flex items-center justify-center`}>
-                        <span className="text-2xl font-bold">{playerDataRef.current.defense_pct}%</span>
+                    <div className={`p-2 ${percentageBackground(player.defense_pct)} text-white aspect-square flex items-center justify-center`}>
+                        <span className="text-2xl font-bold">{player.defense_pct}%</span>
                     </div>
                     <p>Defense</p>
                 </div>
                 <div className="flex flex-col items-center">
-                    <div className={`p-2 ${percentageBackground(playerDataRef.current.physical_pct)} text-white aspect-square flex items-center justify-center`}>
-                        <span className="text-2xl font-bold">{playerDataRef.current.physical_pct}%</span>
+                    <div className={`p-2 ${percentageBackground(player.physical_pct)} text-white aspect-square flex items-center justify-center`}>
+                        <span className="text-2xl font-bold">{player.physical_pct}%</span>
                     </div>
                     <p>Physicality</p>
                 </div>

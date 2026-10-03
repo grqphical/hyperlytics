@@ -25,6 +25,8 @@ interface Props {
     radius?: number;
     /** Populated with the imperative handle; see HyperbolicViewApi. */
     apiRef?: RefObject<HyperbolicViewApi | null>;
+    /** Called with the node index after a click is accepted (not a drag). */
+    onSelect?: (index: number) => void;
     /** Seconds for the click-to-focus animation. */
     focusDuration?: number;
 }
@@ -39,6 +41,7 @@ export default function HyperbolicNodes({
     nodeScale = 0.05,
     radius = 1,
     apiRef,
+    onSelect: onSelectNode,
     focusDuration = FOCUS_DURATION,
 }: Props) {
     const { gl, camera } = useThree();
@@ -187,8 +190,9 @@ export default function HyperbolicNodes({
             if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > DRAG_SLOP_PX) return;
             e.stopPropagation();
             focusOn(index);
+            onSelectNode?.(index);
         },
-        [focusOn]
+        [focusOn, onSelectNode]
     );
 
     // --- Per-frame update ---
