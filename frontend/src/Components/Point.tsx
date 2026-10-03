@@ -13,8 +13,8 @@ interface PointProps {
     state: { current: PointState };
     /** Base size multiplier, applied on top of state.scale */
     scale?: number;
-    /** true = red (baseball), false = green (basketball) */
-    isBaseball?: boolean;
+    /** true = red (Hockey), false = green (basketball) */
+    isHockey?: boolean;
     /** Fired on click (the caller decides whether it was really a click). */
     onClick?: (e: ThreeEvent<PointerEvent>) => void;
 }
@@ -52,12 +52,12 @@ const haloFragment = /* glsl */ `
 export default function Point({
     state,
     scale = 1,
-    isBaseball = false,
+    isHockey = false,
     onClick,
 }: PointProps) {
     const group = useRef<THREE.Group>(null!);
 
-    const color = isBaseball ? RED : GREEN;
+    const color = isHockey ? RED : GREEN;
 
     const haloUniforms = useMemo(
         () => ({

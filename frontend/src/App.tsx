@@ -80,7 +80,7 @@ export default function App() {
                 <PoincareBoundary radius={POINCARE_RADIUS} />
                 <HyperbolicNodes
                     positions={examplePoints}
-                    isBaseball={flags}
+                    isHockey={flags}
                     radius={POINCARE_RADIUS}
                     apiRef={view}
                 />

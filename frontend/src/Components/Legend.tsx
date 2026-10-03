@@ -2,11 +2,11 @@ export default function Legend() {
     return (
         <div className="z-50 absolute bottom-2 left-2 text-white max-w-90 p-4 bg-slate-800">
             <h3 className="text-lg font-bold">Non-Euclidean Sports Analysis</h3>
-            <p className="text-xs">A comparison of NBA and MLB players across three categories: offense, defense, and physicality</p>
+            <p className="text-xs">A comparison of NBA and NHL players across three categories: offense, defense, and physicality</p>
             <h4 className="font-bold text-lg">Legend</h4>
             <div className="mt-1 flex items-center gap-2 text-sm">
                 <span className="h-3 w-3 rounded-xs bg-[#ff3b4e]" aria-hidden="true" />
-                <span className="text-xs">Baseball</span>
+                <span className="text-xs">Hockey</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
                 <span className="h-3 w-3 rounded-xs bg-[#2bff88]" aria-hidden="true" />

@@ -19,7 +19,7 @@ export interface HyperbolicViewApi {
 
 interface Props {
     positions: Vec3[];        // base Poincare ball coordinates from the backend
-    isBaseball: boolean[];    // same length as positions
+    isHockey: boolean[];    // same length as positions
     nodeScale?: number;       // sphere size at the center of the view
     radius?: number;
     /** Populated with the imperative handle; see HyperbolicViewApi. */
@@ -34,7 +34,7 @@ const FOCUS_DURATION = 0.8;
 
 export default function HyperbolicNodes({
     positions,
-    isBaseball,
+    isHockey,
     nodeScale = 0.05,
     radius = 1,
     apiRef,
@@ -222,7 +222,7 @@ export default function HyperbolicNodes({
                     key={i}
                     state={state}
                     scale={nodeScale * radius}
-                    isBaseball={isBaseball[i] ?? false}
+                    isHockey={isHockey[i] ?? false}
                     onClick={(e) => onSelect(i, e)}
                 />
             ))}
