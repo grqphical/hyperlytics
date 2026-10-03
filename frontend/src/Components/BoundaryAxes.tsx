@@ -1,5 +1,5 @@
 // Components/BoundaryAxes.tsx
-import { useMemo, useRef, type ReactNode, type RefObject } from "react";
+import { Suspense, useMemo, useRef, type ReactNode, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Billboard, Line, Text, type BillboardProps } from "@react-three/drei";
 import * as THREE from "three";
@@ -259,46 +259,55 @@ export default function BoundaryAxes({
                         opacity={opacity * 0.6}
                     />
 
-                    {/* Positive end: title, description, and high label */}
-                    <ConstantSizeBillboard position={posLabel.toArray() as Vec3}>
-                        <Text
-                            fontSize={fs}
-                            color={axis.color}
-                            anchorX="center"
-                            anchorY="bottom"
-                            outlineWidth={fs * 0.06}
-                            outlineColor="#05060f"
-                            letterSpacing={0.08}
-                        >
-                            {axis.title}
-                        </Text>
-                        <Text
-                            position={[0, -fs * 0.15, 0]}
-                            fontSize={fs * 0.6}
-                            color="#c9cfe8"
-                            anchorX="center"
-                            anchorY="top"
-                            outlineWidth={fs * 0.04}
-                            outlineColor="#05060f"
-                        >
-                            {`${axis.description}\n+ ${axis.highLabel}`}
-                        </Text>
-                    </ConstantSizeBillboard>
+                    {/*
+                     * Labels are their own Suspense boundary: drei's <Text> blocks on
+                     * the troika font fetch + SDF atlas build. R3F wraps every Canvas
+                     * child in a single implicit Suspense, so without this the whole
+                     * scene blanks until the glyphs are ready. Isolating it lets the
+                     * arms, boundary, and points paint first and the text fade in.
+                     */}
+                    <Suspense fallback={null}>
+                        {/* Positive end: title, description, and high label */}
+                        <ConstantSizeBillboard position={posLabel.toArray() as Vec3}>
+                            <Text
+                                fontSize={fs}
+                                color={axis.color}
+                                anchorX="center"
+                                anchorY="bottom"
+                                outlineWidth={fs * 0.06}
+                                outlineColor="#05060f"
+                                letterSpacing={0.08}
+                            >
+                                {axis.title}
+                            </Text>
+                            <Text
+                                position={[0, -fs * 0.15, 0]}
+                                fontSize={fs * 0.6}
+                                color="#c9cfe8"
+                                anchorX="center"
+                                anchorY="top"
+                                outlineWidth={fs * 0.04}
+                                outlineColor="#05060f"
+                            >
+                                {`${axis.description}\n+ ${axis.highLabel}`}
+                            </Text>
+                        </ConstantSizeBillboard>
 
-                    {/* Negative end: short label only */}
-                    <ConstantSizeBillboard position={negLabel.toArray() as Vec3}>
-                        <Text
-                            fontSize={fs * 0.6}
-                            color={axis.color}
-                            anchorX="center"
-                            anchorY="middle"
-                            fillOpacity={0.75}
-                            outlineWidth={fs * 0.04}
-                            outlineColor="#05060f"
-                        >
-                            {`− ${axis.lowLabel}`}
-                        </Text>
-                    </ConstantSizeBillboard>
+                        {/* Negative end: short label only */}
+                        <ConstantSizeBillboard position={negLabel.toArray() as Vec3}>
+                            <Text
+                                fontSize={fs * 0.6}
+                                color={axis.color}
+                                anchorX="center"
+                                anchorY="middle"
+                                fillOpacity={0.75}
+                                outlineWidth={fs * 0.04}
+                                outlineColor="#05060f"
+                            >
+                                {`− ${axis.lowLabel}`}
+                            </Text>
+                        </ConstantSizeBillboard>
+                    </Suspense>
                 </group>
             ))}
         </group>
