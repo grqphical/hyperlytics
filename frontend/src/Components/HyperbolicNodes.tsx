@@ -126,10 +126,14 @@ export default function HyperbolicNodes({
             // Ignore extra fingers / non-primary buttons so pinch-zoom still works.
             if (activeId !== null) return;
             if (!e.isPrimary) return;
-            if (e.button !== 0 && e.pointerType === "mouse") return;
+            // Panning is a deliberate gesture: hold the right mouse button. Touch
+            // and pen have no right button, so they keep dragging to pan.
+            if (e.pointerType === "mouse" && e.button !== 2) return;
 
             activeId = e.pointerId;
-            downPx.current = { x: e.clientX, y: e.clientY };
+            // Only a left/primary press can become a click, so a right-button pan
+            // must not seed the click-vs-drag test.
+            downPx.current = e.button === 0 ? { x: e.clientX, y: e.clientY } : null;
             last = cursorToBall(e.clientX, e.clientY);
             anim.current = null; // user input cancels any focus animation
             el.setPointerCapture(e.pointerId);
@@ -162,11 +166,15 @@ export default function HyperbolicNodes({
         el.addEventListener("pointermove", move);
         el.addEventListener("pointerup", up);
         el.addEventListener("pointercancel", cancel);
+        // Right-drag is panning, not a context-menu request.
+        const onContextMenu = (e: Event) => e.preventDefault();
+        el.addEventListener("contextmenu", onContextMenu);
         return () => {
             el.removeEventListener("pointerdown", down);
             el.removeEventListener("pointermove", move);
             el.removeEventListener("pointerup", up);
             el.removeEventListener("pointercancel", cancel);
+            el.removeEventListener("contextmenu", onContextMenu);
             el.style.touchAction = prevTouchAction;
         };
     }, [cursorToBall, gl]);

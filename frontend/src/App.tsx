@@ -6,6 +6,8 @@ import Legend from "./Components/Legend";
 import HyperbolicNodes, { type HyperbolicViewApi } from "./Components/HyperbolicNodes";
 import BoundaryAxes from "./Components/BoundaryAxes";
 import type { Vec3 } from "./hyperbolic";
+import { MOUSE } from "three";
+import { OrbitControls } from "@react-three/drei";
 
 const examplePoints = [
     [0.627, 0.119, 0.448],
@@ -51,8 +53,8 @@ const CAMERA_FOV = 50;
  * far enough back that all of it fits inside the vertical field of view:
  * distance >= extent / sin(fov / 2).
  */
-const CAMERA_DISTANCE = (POINCARE_RADIUS * 1.65) / Math.sin((CAMERA_FOV / 2) * (Math.PI / 180));
-const CAMERA_POSITION: Vec3 = [CAMERA_DISTANCE, CAMERA_DISTANCE, CAMERA_DISTANCE]
+const CAMERA_DISTANCE = (POINCARE_RADIUS * 1.5) / Math.sin((CAMERA_FOV / 2) * (Math.PI / 180));
+const CAMERA_POSITION: Vec3 = [CAMERA_DISTANCE, CAMERA_DISTANCE + 3, CAMERA_DISTANCE]
     .map((v) => v / Math.sqrt(3)) as Vec3;
 
 export default function App() {
@@ -66,6 +68,14 @@ export default function App() {
             >
                 <ambientLight intensity={0.5} />
                 <color attach="background" args={["#05060f"]} />
+                {/* RIGHT defaults to PAN; leave it unmapped so right-drag only pans the hyperbolic nodes. */}
+                <OrbitControls
+                    mouseButtons={{
+                        LEFT: MOUSE.ROTATE,
+                        MIDDLE: MOUSE.DOLLY,
+                        RIGHT: undefined,
+                    }}
+                />
 
                 <PoincareBoundary radius={POINCARE_RADIUS} />
                 <HyperbolicNodes
@@ -90,7 +100,7 @@ export default function App() {
                     Reset view
                 </button>
                 <p className="max-w-52 text-right text-[11px] leading-snug text-slate-400">
-                    Drag to pan &middot; click a player to re-center
+                    Hold right-click to pan &middot; click a player to re-center
                 </p>
             </div>
 

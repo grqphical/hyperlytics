@@ -185,7 +185,7 @@ export default function BoundaryAxes({
     const baseOpacity = useRef(new WeakMap<THREE.Material, number>());
     const lastFade = useRef(-1);
 
-    const start = radius * (1 + gap);
+    const start = radius * (gap);
     const end = radius * (1 + length);
     const fs = fontSize * radius;
     const labelOffset = fs * 1.6;
@@ -230,10 +230,6 @@ export default function BoundaryAxes({
                     authored = m.opacity;
                     base.set(m, authored);
                 }
-                m.transparent = true;
-                m.opacity = authored * fade;
-                if (m.fillOpacity !== undefined) m.fillOpacity = authored * fade;
-                if (m.outlineOpacity !== undefined) m.outlineOpacity = authored * fade;
             }
         });
     });

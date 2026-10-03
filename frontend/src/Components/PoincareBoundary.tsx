@@ -65,7 +65,7 @@ export function PoincareBoundary({
     shimmer = 0.1,
     inside = false,
     graticule = true,
-    graticuleOpacity = 0.08,
+    graticuleOpacity = 0.04,
 }: PoincareBoundaryProps) {
     const uniforms = useMemo(
         () => ({
