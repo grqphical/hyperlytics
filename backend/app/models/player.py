@@ -22,8 +22,8 @@ class Player(Base):
     weight_lbs: Mapped[float | None] = mapped_column(Float)
     height_in: Mapped[float | None] = mapped_column(Float)
     age: Mapped[int | None] = mapped_column(Integer)
-    dominant_hand: Mapped[str | None] = mapped_column(String(10))
-    injuries: Mapped[list | None] = mapped_column(JSON)
+    dominant_hand: Mapped[str | None] = mapped_column(String(10)) # don't have yet
+    injuries: Mapped[list | None] = mapped_column(JSON) # don't have yet
 
     # cached raw API stats (so we never refetch)
     raw_stats: Mapped[dict | None] = mapped_column(JSON)
