@@ -3,6 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import Point, { type PointState } from "./Components/Point";
 import { PoincareBoundary } from "./Components/PoincareBoundary";
 import Legend from "./Components/Legend";
+import HyperbolicNodes from "./Components/HyperbolicNodes";
+import type { Vec3 } from "./hyperbolic";
 
 const examplePoints = [
     [0.627, 0.119, 0.448],
@@ -37,32 +39,53 @@ const examplePoints = [
     [0.119, -0.082, -0.176],
     [0.581, -0.119, 0.402],
     [-0.226, -0.488, 0.341]
+] as Vec3[]
+
+const flags = [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
 ]
+
 const POINCARE_RADIUS = 3.0
 
 export default function App() {
-    const points = useRef<PointState[]>(
-        examplePoints.map(([x, y, z]): PointState => ({
-            position: [x * POINCARE_RADIUS, y * POINCARE_RADIUS, z * POINCARE_RADIUS],
-            rotation: [0, 0, 0],
-            scale: 1,
-        }))
-    );
-
     return (
         <div>
             <Canvas camera={{ position: [0, 0, 5] }} style={{ width: "100vw", height: "100vh" }}>
                 <ambientLight intensity={0.5} />
                 <color attach="background" args={['#05060f']} />
                 <PoincareBoundary radius={POINCARE_RADIUS} />
-                {points.current.map((point, index) => (
-                    <Point
-                        key={index}
-                        state={{ current: point }}
-                        scale={0.04}
-                        isBaseball={true}
-                    />
-                ))}
+                <HyperbolicNodes positions={examplePoints} isBaseball={flags} radius={POINCARE_RADIUS} />
             </Canvas>
             <Legend />
         </div>
