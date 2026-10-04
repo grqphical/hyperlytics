@@ -57,15 +57,16 @@ export default function HyperbolicNodes({
 }: Props) {
     const { gl, camera } = useThree();
 
-    if (players === null) {
-        return;
-    }
-
+    // No early return here: hooks must run in the same order every render, so the
+    // empty state is handled at the JSX boundary instead.
     const view = useRef<Mat4>(identity());
-    const hyper = useMemo(() => players.map((player) => ballToHyperboloid([player.x, player.y, player.z])), [players]);
+    const hyper = useMemo(
+        () => (players ?? []).map((player) => ballToHyperboloid([player.x, player.y, player.z])),
+        [players]
+    );
     const states = useMemo(
         () =>
-            players.map(() => ({
+            (players ?? []).map(() => ({
                 current: { position: [0, 0, 0], rotation: [0, 0, 0], scale: 1 } as PointState,
             })),
         [players]
@@ -234,6 +235,8 @@ export default function HyperbolicNodes({
             st.scale = Math.max(0.05, 1 - s);
         }
     });
+
+    if (players === null) return null;
 
     return (
         <>
