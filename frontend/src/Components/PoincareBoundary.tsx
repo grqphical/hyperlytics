@@ -58,7 +58,7 @@ export interface PoincareBoundaryProps {
 }
 
 export function PoincareBoundary({
-    radius = 3,
+    radius = 2.5,
     color = '#7c6cff',
     power = 3,
     intensity = 1.5,
