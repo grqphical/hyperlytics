@@ -1,7 +1,7 @@
 from typing import Literal
 
 from fastapi import APIRouter, Depends, Query
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, computed_field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -9,6 +9,8 @@ from app.database import get_db
 from app.models import Player
 
 router = APIRouter(prefix="/players", tags=["players"])
+
+TOTAL_GAMES = {"basketball": 82, "hockey": 82}
 
 
 class PlayerOut(BaseModel):
@@ -28,6 +30,14 @@ class PlayerOut(BaseModel):
     x: float | None
     y: float | None
     z: float | None
+
+    @computed_field
+    @property
+    def games_played_pct(self) -> float | None:
+        total = TOTAL_GAMES.get(self.sport)
+        if not total or self.games_played is None:
+            return None
+        return self.games_played / total
 
 
 @router.get("", response_model=list[PlayerOut])
