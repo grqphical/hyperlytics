@@ -6,8 +6,8 @@ from app.database import Base, SessionLocal, engine
 from app.models import Player
 
 DATA_FILES = [
-    Path("data/basketball.json"),
-    Path("data/hockey.json"),
+    Path("data/NBA/nba_players.json"),
+    Path("data/NHL/nhl_players.json"),
 ]
 
 # Keys that map to real columns. Everything else goes into raw_stats.
