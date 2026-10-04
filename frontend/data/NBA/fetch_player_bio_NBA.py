@@ -115,6 +115,7 @@ for p in players:
         row[s] = b["total"].get(s, b["average"].get(s))
     row["ppg"] = b["average"].get("points")
     row["mpg"] = b["average"].get("minutes")
+    row["games_played"] = b["total"].get("games_played")
     out.append(row)
 
 with open("nba_players.json", "w") as f:
