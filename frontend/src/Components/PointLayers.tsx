@@ -5,10 +5,17 @@ import { useMemo } from "react";
 
 const RED = "#ff3b4e";
 const GREEN = "#2bff88";
+/** Outline colours, one per selection slot. */
+const ACTIVE_OUTLINE = "#38bdf8";
+const COMPARE_OUTLINE = "#fb923c";
 
 const coreGeometry = new THREE.SphereGeometry(1, 48, 48);
 // Halo scale baked into geometry so instances share one transform
 const haloGeometry = new THREE.SphereGeometry(1.35, 32, 32);
+// Sits just outside the halo so the selection reads as a ring, not a second glow
+const outlineGeometry = new THREE.SphereGeometry(1.7, 32, 32);
+/** Outline is this much wider than the node it wraps. */
+export const OUTLINE_SPREAD = 1.0;
 
 const haloVertex = /* glsl */ `
   varying vec3 vNormal;
@@ -91,6 +98,39 @@ function makeLayer(color: string) {
 export const hockeyLayer = makeLayer(RED);
 export const basketballLayer = makeLayer(GREEN);
 
+/** Which of the two selection slots a node currently occupies. */
+export type SelectionRole = "active" | "compare";
+
+/**
+ * Inverted-hull outline drawn around a selected node. Each role gets its own
+ * layer so the colour lives in the material rather than in a per-instance
+ * attribute, and there are never more than a couple of instances to draw.
+ */
+function makeOutlineLayer(color: string) {
+    const [Parent, Instance] = createInstances();
+
+    function OutlineLayer({ children }: { children: React.ReactNode }) {
+        return (
+            <Parent
+                geometry={outlineGeometry}
+                limit={4}
+                frustumCulled={false}
+                raycast={() => null} // outlines must never steal clicks
+                renderOrder={2}
+            >
+                {/* BackSide renders only the far shell, leaving a coloured rim. */}
+                <meshBasicMaterial color={color} side={THREE.BackSide} toneMapped={false} />
+                {children}
+            </Parent>
+        );
+    }
+
+    return { OutlineLayer, Instance };
+}
+
+export const activeOutlineLayer = makeOutlineLayer(ACTIVE_OUTLINE);
+export const compareOutlineLayer = makeOutlineLayer(COMPARE_OUTLINE);
+
 /** Wrap all <Point/>s in this. `limit` = max points per team. */
 export function PointLayers({
     children,
@@ -100,8 +140,12 @@ export function PointLayers({
     limit?: number;
 }) {
     return (
-        <hockeyLayer.Layer limit={limit}>
-            <basketballLayer.Layer limit={limit}>{children}</basketballLayer.Layer>
-        </hockeyLayer.Layer>
+        <activeOutlineLayer.OutlineLayer>
+            <compareOutlineLayer.OutlineLayer>
+                <hockeyLayer.Layer limit={limit}>
+                    <basketballLayer.Layer limit={limit}>{children}</basketballLayer.Layer>
+                </hockeyLayer.Layer>
+            </compareOutlineLayer.OutlineLayer>
+        </activeOutlineLayer.OutlineLayer>
     );
 }

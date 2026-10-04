@@ -190,6 +190,8 @@ export default function App() {
                         apiRef={view}
                         onSelect={onSelect}
                         recenterOnClick={recenterOnClick}
+                        activeIndex={activeIndex}
+                        compareIndex={compareIndex}
                     />
                     <BoundaryAxes radius={POINCARE_RADIUS} view={view} />
 

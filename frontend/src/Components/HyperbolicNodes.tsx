@@ -31,6 +31,10 @@ interface Props {
     focusDuration?: number;
     /** When false, clicking a node only selects it; the view stays put. */
     recenterOnClick?: boolean;
+    /** Index of the active player; outlined in the active colour. */
+    activeIndex?: number | null;
+    /** Index of the comparison player; outlined in the comparison colour. */
+    compareIndex?: number | null;
 }
 
 const MAX_R = 0.95;          // clamp cursor hits so we never grab "infinity"
@@ -57,6 +61,8 @@ export default function HyperbolicNodes({
     onSelect: onSelectNode,
     focusDuration = FOCUS_DURATION,
     recenterOnClick = true,
+    activeIndex = null,
+    compareIndex = null,
 }: Props) {
     const { gl, camera } = useThree();
 
@@ -252,6 +258,9 @@ export default function HyperbolicNodes({
                         state={state}
                         scale={nodeScale * radius * sizeMultiplier(players, i)}
                         isHockey={players[i].sport === "hockey"}
+                        selection={
+                            i === activeIndex ? "active" : i === compareIndex ? "compare" : undefined
+                        }
                         onClick={(e) => onSelect(i, e)}
                     />
                 ))}
