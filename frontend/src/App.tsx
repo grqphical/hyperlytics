@@ -8,7 +8,10 @@ import BoundaryAxes from "./Components/BoundaryAxes";
 import type { Vec3 } from "./hyperbolic";
 import { MOUSE } from "three";
 import { OrbitControls } from "@react-three/drei";
-import Tooltip, { type PlayerData } from "./Components/Tooltip";
+import PlayerPanel from "./Components/PlayerPanel";
+import ViewControls from "./Components/ViewControls";
+import HintBar from "./Components/HintBar";
+import Panel from "./Components/Panel";
 import type { Athlete } from "./models";
 
 
@@ -23,8 +26,14 @@ const CAMERA_DISTANCE = (POINCARE_RADIUS * 1.5) / Math.sin((CAMERA_FOV / 2) * (M
 const CAMERA_POSITION: Vec3 = [CAMERA_DISTANCE, CAMERA_DISTANCE + 3, CAMERA_DISTANCE]
     .map((v) => v / Math.sqrt(3)) as Vec3;
 
+const VISUAL_DESCRIPTION =
+    "Interactive 3D plot of NBA and NHL players inside a Poincare ball. Every point is one " +
+    "player, colour-coded by sport and sized by games played. Select a point to read that " +
+    "player's offense, defense and physicality ratings.";
+
 export default function App() {
     const [players, setPlayers] = useState<Athlete[] | null>(null);
+    const [loadError, setLoadError] = useState(false);
 
     useEffect(() => {
         const fetchPlayers = async () => {
@@ -46,6 +55,7 @@ export default function App() {
                 ]);
             } catch (error) {
                 console.error(error);
+                setLoadError(true);
             }
         };
 
@@ -53,77 +63,139 @@ export default function App() {
     }, []);
 
     const view = useRef<HyperbolicViewApi>(null);
-    const [player, setPlayer] = useState<PlayerData | null>(null);
+    const [player, setPlayer] = useState<Athlete | null>(null);
     const [recenterOnClick, setRecenterOnClick] = useState(true);
+    /** Mirrors the selection into a live region, since the canvas itself is not announced. */
+    const [announcement, setAnnouncement] = useState("");
+
+    const clearSelection = useCallback(() => {
+        setPlayer(null);
+        setAnnouncement("Player deselected.");
+    }, []);
 
     const onSelect = useCallback((index: number) => {
-        setPlayer(players?.[index] ?? null);
+        const selected = players?.[index] ?? null;
+        setPlayer(selected);
+        setAnnouncement(selected ? `${selected.name} selected.` : "Player deselected.");
     }, [players]);
 
     const reset = useCallback(() => {
         view.current?.reset();
-        setPlayer(null);
-    }, []);
+        clearSelection();
+    }, [clearSelection]);
+
+    // Keyboard equivalents for the pointer gestures, so the view can be driven
+    // without a mouse.
+    useEffect(() => {
+        const onKeyDown = (event: KeyboardEvent) => {
+            // Never swallow keys meant for a focused control or a modified
+            // shortcut such as Ctrl+R.
+            if (event.ctrlKey || event.metaKey || event.altKey) return;
+            const target = event.target;
+            if (target instanceof HTMLElement && (target.isContentEditable || target.tagName === "INPUT")) return;
+
+            if (event.key === "r" || event.key === "R") reset();
+            else if (event.key === "Escape") clearSelection();
+        };
+
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [clearSelection, reset]);
 
     return (
-        <div className="relative h-screen w-screen touch-none overflow-hidden select-none">
-            <Canvas
-                camera={{ position: CAMERA_POSITION, fov: CAMERA_FOV }}
-                onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
-            >
-                <ambientLight intensity={0.5} />
-                <color attach="background" args={["#05060f"]} />
-                {/* RIGHT defaults to PAN; leave it unmapped so right-drag only pans the hyperbolic nodes. */}
-                <OrbitControls
-                    mouseButtons={{
-                        LEFT: MOUSE.ROTATE,
-                        MIDDLE: MOUSE.DOLLY,
-                        RIGHT: undefined,
-                    }}
-                    minDistance={2} maxDistance={15}
-                />
-
-                <PoincareBoundary radius={POINCARE_RADIUS} />
-                <HyperbolicNodes
-                    players={players}
-                    radius={POINCARE_RADIUS}
-                    apiRef={view}
-                    onSelect={onSelect}
-                    recenterOnClick={recenterOnClick}
-                />
-                <BoundaryAxes radius={POINCARE_RADIUS} view={view} />
-
-                <EffectComposer>
-                    <Bloom luminanceThreshold={0.2} mipmapBlur />
-                </EffectComposer>
-            </Canvas>
-
-            <div className="absolute top-3 right-3 z-10 flex flex-col items-end gap-2">
-                <button
-                    type="button"
-                    onClick={reset}
-                    className="rounded-md border border-white/20 bg-slate-800/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur transition-colors hover:bg-slate-700 active:bg-slate-600"
+        <main className="relative h-screen w-screen overflow-hidden select-none">
+            {/* The canvas is decorative for assistive tech; the HUD and the live
+                region below carry everything worth reading out. */}
+            <div className="absolute inset-0 touch-none" aria-hidden="true">
+                <Canvas
+                    camera={{ position: CAMERA_POSITION, fov: CAMERA_FOV }}
+                    onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
                 >
-                    Reset view
-                </button>
-                <label className="flex cursor-pointer items-center gap-1.5 rounded-md border border-white/20 bg-slate-800/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur">
-                    <input
-                        type="checkbox"
-                        checked={recenterOnClick}
-                        onChange={(e) => setRecenterOnClick(e.target.checked)}
-                        className="h-3 w-3 cursor-pointer accent-sky-400"
+                    <ambientLight intensity={0.5} />
+                    <color attach="background" args={["#05060f"]} />
+                    {/* RIGHT defaults to PAN; leave it unmapped so right-drag only pans the hyperbolic nodes. */}
+                    <OrbitControls
+                        mouseButtons={{
+                            LEFT: MOUSE.ROTATE,
+                            MIDDLE: MOUSE.DOLLY,
+                            RIGHT: undefined,
+                        }}
+                        minDistance={2} maxDistance={15}
                     />
-                    Auto re-center
-                </label>
-                <p className="max-w-52 text-right text-[11px] leading-snug text-slate-400">
-                    Hold right-click to pan &middot; click a player to re-center
-                </p>
-            </div>
-            <div className="absolute top-2 left-2 flex flex-col gap-2">
-                <Legend />
-                <Tooltip player={player} />
+
+                    <PoincareBoundary radius={POINCARE_RADIUS} />
+                    <HyperbolicNodes
+                        players={players}
+                        radius={POINCARE_RADIUS}
+                        apiRef={view}
+                        onSelect={onSelect}
+                        recenterOnClick={recenterOnClick}
+                    />
+                    <BoundaryAxes radius={POINCARE_RADIUS} view={view} />
+
+                    <EffectComposer>
+                        <Bloom luminanceThreshold={0.2} mipmapBlur />
+                    </EffectComposer>
+                </Canvas>
             </div>
 
-        </div>
+            <p className="sr-only">{VISUAL_DESCRIPTION}</p>
+            <p aria-live="polite" className="sr-only">
+                {announcement}
+            </p>
+
+            {players === null ? (
+                <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center p-3">
+                    {loadError ? (
+                        <Panel title="Could not load players">
+                            <p role="alert" className="text-xs leading-relaxed text-slate-300">
+                                The player data could not be fetched from the API. Check that the
+                                backend is running, then reload the page.
+                            </p>
+                        </Panel>
+                    ) : (
+                        <Panel title="Loading">
+                            <p role="status" className="text-xs text-slate-300">
+                                Fetching player data&hellip;
+                            </p>
+                        </Panel>
+                    )}
+                </div>
+            ) : (
+                <>
+                    {/* Top row: what this is, the current selection, the controls. */}
+                    <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between gap-3 p-3">
+                        <div className="flex min-w-0 flex-col gap-2">
+                            <header className="max-w-72 mb-4">
+                                <h1 className="text-4xl font-bold leading-tight text-white mb-2">
+                                    Hyperlytics
+                                </h1>
+                                <p className="mt-0.5 text-[11px] leading-snug text-slate-400">
+                                    NBA and NHL players compared on offense, defense and
+                                    physicality.
+                                </p>
+                            </header>
+                            <PlayerPanel player={player} />
+                        </div>
+
+                        <ViewControls
+                            recenterOnClick={recenterOnClick}
+                            onRecenterOnClickChange={setRecenterOnClick}
+                            onReset={reset}
+                        />
+                    </div>
+
+                    {/* Bottom row: the key, plus gestures that apply everywhere. */}
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex items-end p-3">
+                        <Legend />
+                    </div>
+                    {/* Anchored to the viewport, not the bottom row, so it stays
+                        centred no matter how wide the legend is. */}
+                    <div className="pointer-events-none absolute inset-x-0 bottom-3 z-10 hidden justify-center px-3 md:flex">
+                        <HintBar />
+                    </div>
+                </>
+            )}
+        </main>
     );
 }
