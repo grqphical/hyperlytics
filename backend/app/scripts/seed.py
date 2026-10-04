@@ -30,6 +30,7 @@ def parse_player(raw: dict) -> dict:
         "injuries": raw.get("injuries"),
         "raw_stats": {k: v for k, v in raw.items() if k not in IDENTITY_KEYS},
         "fetched_at": datetime.now(timezone.utc),
+        "games_played": raw.get("games_played")
     }
 
 

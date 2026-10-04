@@ -24,6 +24,7 @@ class Player(Base):
     age: Mapped[int | None] = mapped_column(Integer)
     dominant_hand: Mapped[str | None] = mapped_column(String(10)) # don't have yet
     injuries: Mapped[list | None] = mapped_column(JSON) # don't have yet
+    games_played: Mapped[int] = mapped_column(Integer)
 
     # cached raw API stats (so we never refetch)
     raw_stats: Mapped[dict | None] = mapped_column(JSON)

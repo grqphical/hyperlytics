@@ -24,6 +24,7 @@ class PlayerOut(BaseModel):
     offense_pct: float | None
     defense_pct: float | None
     physical_pct: float | None
+    games_played: int | None
     x: float | None
     y: float | None
     z: float | None
