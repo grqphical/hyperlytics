@@ -5,6 +5,8 @@ import type { Athlete } from "../models";
 interface Props {
     /** The second player, or null when no comparison has been picked yet. */
     player: Athlete | null;
+    /** Comparison is only available while the view is locked on a player. */
+    enabled: boolean;
     /** Puts this player in the active slot and the active one here. */
     onSwap: () => void;
     onClear: () => void;
@@ -13,7 +15,19 @@ interface Props {
 const ACTION_CLASSES =
     "rounded-md border border-white/20 bg-slate-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 active:bg-slate-600";
 
-export default function ComparePanel({ player, onSwap, onClear }: Props) {
+export default function ComparePanel({ player, enabled, onSwap, onClear }: Props) {
+    if (!enabled) {
+        return (
+            <Panel title="Comparison player">
+                <p className="text-xs leading-relaxed text-slate-400">
+                    Comparison is off while the view is unlocked. Set it to{" "}
+                    <span className="font-medium text-slate-200">Locked</span> on the active
+                    player to pick a second player to compare against.
+                </p>
+            </Panel>
+        );
+    }
+
     if (player === null) {
         return (
             <Panel title="Comparison player">

@@ -66,9 +66,11 @@ export default function App() {
     const view = useRef<HyperbolicViewApi>(null);
     /**
      * Two independent slots, stored as indices into `players` so the two picks
-     * can never collide on an id. The first player picked becomes the active one
-     * and stays there; every later click refills the comparison slot instead, so
-     * the active profile is never yanked out from under the user.
+     * can never collide on an id. In Locked mode the first player picked becomes
+     * the active one and stays there, and every later click refills the
+     * comparison slot instead, so the active profile is never yanked out from
+     * under the user. Unlocked mode has no fixed anchor to compare against, so
+     * it only ever holds the active player.
      */
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [compareIndex, setCompareIndex] = useState<number | null>(null);
@@ -93,6 +95,16 @@ export default function App() {
                 return;
             }
 
+            // In Unlocked (re-centering) mode the view is driven by the click, so
+            // there is no fixed player to compare against: each click simply
+            // replaces the active player and drops the comparison.
+            if (recenterOnClick) {
+                setActiveIndex(index);
+                setCompareIndex(null);
+                setAnnouncement(`${selected.name} selected as the active player.`);
+                return;
+            }
+
             // Clicking the active player again is a no-op: the active player is
             // the anchor the comparison is read against.
             if (index === activeIndex) {
@@ -113,7 +125,7 @@ export default function App() {
                     : `${selected.name} replaced as the comparison player.`
             );
         },
-        [activeIndex, clearSelection, compareIndex, players]
+        [activeIndex, clearSelection, compareIndex, players, recenterOnClick]
     );
 
     /** Exchanges the two slots, so either player can become the active one. */
@@ -246,6 +258,7 @@ export default function App() {
                             />
                             <ComparePanel
                                 player={compare}
+                                enabled={!recenterOnClick}
                                 onSwap={swapSelection}
                                 onClear={clearCompare}
                             />
