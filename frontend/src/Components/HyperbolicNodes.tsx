@@ -35,8 +35,8 @@ const MAX_R = 0.95;          // clamp cursor hits so we never grab "infinity"
 const DRAG_SLOP_PX = 6;      // movement below this still counts as a click, not a drag
 const FOCUS_DURATION = 0.8;
 /** Size multiplier range for the `sizes` driver, so the biggest node stays clickable. */
-const SIZE_MIN = 0.3;
-const SIZE_MAX = 1.0
+const SIZE_MIN = 0.1;
+const SIZE_MAX = 0.5;
 function sizeMultiplier(players: Athlete[] | null, index: number): number {
     if (players === null) {
         return 0.0
