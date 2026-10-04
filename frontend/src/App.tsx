@@ -79,6 +79,7 @@ export default function App() {
                         MIDDLE: MOUSE.DOLLY,
                         RIGHT: undefined,
                     }}
+                    minDistance={2} maxDistance={15}
                 />
 
                 <PoincareBoundary radius={POINCARE_RADIUS} />
