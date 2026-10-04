@@ -8,6 +8,9 @@ Each of these categories take stats from the individual sports and combines them
 of the players in our dataset. We then take these percentages and plot them as points on a 3D, non-Euclidean space using a Poincaré Ball. You
 also are able to compare players stats directly head-to-head, allowing for more in-depth analysis.
 
+## Demo
+![](assets/hyperlytics_final_demo.mp4)
+
 ## To Launch
 First time:
 ```bash
