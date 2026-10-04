@@ -8,6 +8,8 @@ export interface PlayerData {
     offense_pct: number
     defense_pct: number
     physical_pct: number
+    /** Share of a full season's games played, as a 0-1 float. */
+    games_played_pct: number
 }
 
 interface Props {

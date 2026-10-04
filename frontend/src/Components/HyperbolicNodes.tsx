@@ -21,6 +21,8 @@ export interface HyperbolicViewApi {
 interface Props {
     positions: Vec3[];        // base Poincare ball coordinates from the backend
     isHockey: boolean[];    // same length as positions
+    /** Per-node size drivers as 0-1 floats (e.g. games played share); same length as positions. */
+    sizes?: number[];
     nodeScale?: number;       // sphere size at the center of the view
     radius?: number;
     /** Populated with the imperative handle; see HyperbolicViewApi. */
@@ -34,10 +36,20 @@ interface Props {
 const MAX_R = 0.95;          // clamp cursor hits so we never grab "infinity"
 const DRAG_SLOP_PX = 6;      // movement below this still counts as a click, not a drag
 const FOCUS_DURATION = 0.8;
+/** Size multiplier range for the `sizes` driver, so the biggest node stays clickable. */
+const SIZE_MIN = 0.3;
+const SIZE_MAX = 1.0
+function sizeMultiplier(sizes: number[] | undefined, index: number): number {
+    const s = sizes?.[index];
+    if (s === undefined) return 1;
+    const clamped = Math.min(1, Math.max(0, s));
+    return SIZE_MIN + clamped * (SIZE_MAX - SIZE_MIN);
+}
 
 export default function HyperbolicNodes({
     positions,
     isHockey,
+    sizes,
     nodeScale = 0.05,
     radius = 1,
     apiRef,
@@ -227,7 +239,7 @@ export default function HyperbolicNodes({
                     <Point
                         key={i}
                         state={state}
-                        scale={nodeScale * radius}
+                        scale={nodeScale * radius * sizeMultiplier(sizes, i)}
                         isHockey={isHockey[i] ?? false}
                         onClick={(e) => onSelect(i, e)}
                     />
