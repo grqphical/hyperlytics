@@ -47,19 +47,19 @@ export default function Tooltip({ player }: Props) {
             <p className="text-sm">{player.sport} &#x2022; Age: {player.age} &#x2022; {formatInches(player.height_in)} &#x2022; {player.weight_lbs} lbs</p>
             <div className="grid grid-cols-3 gap-2 mt-3">
                 <div className="flex flex-col items-center">
-                    <div className={`p-2 ${percentageBackground(player.offense_pct)} text-white aspect-square flex items-center justify-center`}>
+                    <div className={`p-2 ${percentageBackground(player.offense_pct)} text-white aspect-square flex items-center justify-center w-16 h-16`}>
                         <span className="text-2xl font-bold">{player.offense_pct.toFixed(0)}%</span>
                     </div>
                     <p>Offense</p>
                 </div>
                 <div className="flex flex-col items-center">
-                    <div className={`p-2 ${percentageBackground(player.defense_pct)} text-white aspect-square flex items-center justify-center`}>
+                    <div className={`p-2 ${percentageBackground(player.defense_pct)} text-white aspect-square flex items-center justify-center w-16 h-16`}>
                         <span className="text-2xl font-bold">{player.defense_pct.toFixed(0)}%</span>
                     </div>
                     <p>Defense</p>
                 </div>
                 <div className="flex flex-col items-center">
-                    <div className={`p-2 ${percentageBackground(player.physical_pct)} text-white aspect-square flex items-center justify-center`}>
+                    <div className={`p-2 ${percentageBackground(player.physical_pct)} text-white aspect-square flex items-center justify-center w-16 h-16`}>
                         <span className="text-2xl font-bold">{player.physical_pct.toFixed(0)}%</span>
                     </div>
                     <p>Physicality</p>
