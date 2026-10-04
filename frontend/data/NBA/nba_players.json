@@ -17,7 +17,8 @@
     "steals": 105,
     "blocks": 34,
     "ppg": 33.5,
-    "mpg": 35.8
+    "mpg": 35.8,
+    "games_played": 64
   },
   {
     "id": "d9ea4a8f-ff51-408d-b518-980efc2a35a1",
@@ -37,7 +38,8 @@
     "steals": 95,
     "blocks": 52,
     "ppg": 31.1,
-    "mpg": 33.2
+    "mpg": 33.2,
+    "games_played": 68
   },
   {
     "id": "ffc5579c-783f-4d62-80ab-3c3dcb05a27d",
@@ -57,7 +59,8 @@
     "steals": 72,
     "blocks": 27,
     "ppg": 28.7,
-    "mpg": 34.4
+    "mpg": 34.4,
+    "games_played": 71
   },
   {
     "id": "53f2fa48-e61b-49fb-843d-8a3e872257eb",
@@ -77,7 +80,8 @@
     "steals": 62,
     "blocks": 71,
     "ppg": 26,
-    "mpg": 36.4
+    "mpg": 36.4,
+    "games_played": 78
   },
   {
     "id": "75fc46eb-71d8-4d1a-984f-3747ccd7a4c9",
@@ -97,7 +101,8 @@
     "steals": 130,
     "blocks": 55,
     "ppg": 28.3,
-    "mpg": 38
+    "mpg": 38,
+    "games_played": 70
   },
   {
     "id": "b6dde96e-3748-4cbe-86d2-798d5dffb3c0",
@@ -117,7 +122,8 @@
     "steals": 104,
     "blocks": 20,
     "ppg": 27.9,
-    "mpg": 33.5
+    "mpg": 33.5,
+    "games_played": 70
   },
   {
     "id": "8d3edba8-9004-4199-9328-cc2208e8b0d3",
@@ -137,7 +143,8 @@
     "steals": 57,
     "blocks": 8,
     "ppg": 26,
-    "mpg": 35
+    "mpg": 35,
+    "games_played": 74
   },
   {
     "id": "685576ef-ea6c-4ccf-affd-18916baf4e60",
@@ -157,7 +164,8 @@
     "steals": 66,
     "blocks": 29,
     "ppg": 25.4,
-    "mpg": 35.4
+    "mpg": 35.4,
+    "games_played": 75
   },
   {
     "id": "c12fb587-fc86-471c-8a84-19caf31325ce",
@@ -177,7 +185,8 @@
     "steals": 122,
     "blocks": 27,
     "ppg": 27.9,
-    "mpg": 32.1
+    "mpg": 32.1,
+    "games_played": 65
   },
   {
     "id": "f2625432-3903-4f90-9b0b-2e4f63856bb0",
@@ -197,7 +206,8 @@
     "steals": 92,
     "blocks": 53,
     "ppg": 27.7,
-    "mpg": 34.8
+    "mpg": 34.8,
+    "games_played": 65
   },
   {
     "id": "d0c7135a-1aea-40cb-ba20-df656de71749",
@@ -217,7 +227,8 @@
     "steals": 83,
     "blocks": 49,
     "ppg": 28.8,
-    "mpg": 35
+    "mpg": 35,
+    "games_played": 61
   },
   {
     "id": "31baa84f-c759-4f92-8e1f-a92305ade3d6",
@@ -237,7 +248,8 @@
     "steals": 51,
     "blocks": 18,
     "ppg": 26.1,
-    "mpg": 33.5
+    "mpg": 33.5,
+    "games_played": 64
   },
   {
     "id": "24c85a15-686e-4161-934b-40948188fa36",
@@ -257,7 +269,8 @@
     "steals": 86,
     "blocks": 18,
     "ppg": 21.1,
-    "mpg": 33
+    "mpg": 33,
+    "games_played": 79
   },
   {
     "id": "8082841d-e516-43c6-a81b-7987fa321acd",
@@ -277,7 +290,8 @@
     "steals": 58,
     "blocks": 55,
     "ppg": 21.5,
-    "mpg": 33.8
+    "mpg": 33.8,
+    "games_played": 77
   },
   {
     "id": "a52b2c84-9c3d-4d6e-8a3b-10e75d11c2bc",
@@ -297,7 +311,8 @@
     "steals": 22,
     "blocks": 12,
     "ppg": 20.5,
-    "mpg": 33.8
+    "mpg": 33.8,
+    "games_played": 26
   },
   {
     "id": "49962b13-0afc-43f5-a3e2-7e37b7736260",
@@ -317,7 +332,8 @@
     "steals": 86,
     "blocks": 37,
     "ppg": 20.1,
-    "mpg": 33.6
+    "mpg": 33.6,
+    "games_played": 82
   },
   {
     "id": "d3d0ab55-b939-47b3-af27-77cdf85d7956",
@@ -337,7 +353,8 @@
     "steals": 102,
     "blocks": 42,
     "ppg": 20.8,
-    "mpg": 33.4
+    "mpg": 33.4,
+    "games_played": 78
   },
   {
     "id": "d222539f-fa52-4070-807f-d3aba372f46d",
@@ -357,7 +374,8 @@
     "steals": 89,
     "blocks": 31,
     "ppg": 22.5,
-    "mpg": 35.2
+    "mpg": 35.2,
+    "games_played": 72
   },
   {
     "id": "98e2cdeb-69dc-499c-a853-84c32c714924",
@@ -377,7 +395,8 @@
     "steals": 66,
     "blocks": 197,
     "ppg": 25,
-    "mpg": 29.2
+    "mpg": 29.2,
+    "games_played": 64
   },
   {
     "id": "49d8f5ef-2867-4597-a3ab-5ffc5e651258",
@@ -397,7 +416,8 @@
     "steals": 51,
     "blocks": 40,
     "ppg": 22.2,
-    "mpg": 34.8
+    "mpg": 34.8,
+    "games_played": 72
   },
   {
     "id": "312f21c9-a061-43e2-9a22-65199131068e",
@@ -417,7 +437,8 @@
     "steals": 51,
     "blocks": 41,
     "ppg": 24.2,
-    "mpg": 33.3
+    "mpg": 33.3,
+    "games_played": 66
   },
   {
     "id": "57d55cd4-6ab8-4255-a248-bef800c0cbab",
@@ -437,7 +458,8 @@
     "steals": 92,
     "blocks": 54,
     "ppg": 23.9,
-    "mpg": 33.9
+    "mpg": 33.9,
+    "games_played": 64
   },
   {
     "id": "ab532a66-9314-4d57-ade7-bb54a70c65ad",
@@ -457,7 +479,8 @@
     "steals": 65,
     "blocks": 40,
     "ppg": 20.1,
-    "mpg": 31
+    "mpg": 31,
+    "games_played": 75
   },
   {
     "id": "0b9a642d-d6f6-4c65-a7bd-d82e016e1b5d",
@@ -477,7 +500,8 @@
     "steals": 57,
     "blocks": 19,
     "ppg": 18.5,
-    "mpg": 31.5
+    "mpg": 31.5,
+    "games_played": 81
   },
   {
     "id": "3df1db1d-6596-489e-8e26-80f60fd9b1f4",
@@ -497,7 +521,8 @@
     "steals": 69,
     "blocks": 25,
     "ppg": 24,
-    "mpg": 33.2
+    "mpg": 33.2,
+    "games_played": 62
   },
   {
     "id": "1d323a11-1758-4975-ba6f-1a03b7a2157c",
@@ -517,7 +542,8 @@
     "steals": 84,
     "blocks": 64,
     "ppg": 21,
-    "mpg": 33.5
+    "mpg": 33.5,
+    "games_played": 70
   },
   {
     "id": "11c303dc-540c-4090-8e0c-76c2fb2c125a",
@@ -537,7 +563,8 @@
     "steals": 86,
     "blocks": 49,
     "ppg": 20.1,
-    "mpg": 32.4
+    "mpg": 32.4,
+    "games_played": 73
   },
   {
     "id": "47ff78e7-5607-48d6-9c1a-bddb075dbe70",
@@ -557,7 +584,8 @@
     "steals": 85,
     "blocks": 77,
     "ppg": 20.4,
-    "mpg": 33.3
+    "mpg": 33.3,
+    "games_played": 72
   },
   {
     "id": "1738927f-6ef3-4b23-921d-168b4371f917",
@@ -577,7 +605,8 @@
     "steals": 114,
     "blocks": 116,
     "ppg": 18.1,
-    "mpg": 33.5
+    "mpg": 33.5,
+    "games_played": 80
   },
   {
     "id": "be53f27f-c666-4bd2-8fcd-0713f963aa2b",
@@ -597,7 +626,8 @@
     "steals": 87,
     "blocks": 17,
     "ppg": 20.1,
-    "mpg": 28
+    "mpg": 28,
+    "games_played": 72
   },
   {
     "id": "b8b323c1-5691-43a4-9c48-707531803d6a",
@@ -617,7 +647,8 @@
     "steals": 119,
     "blocks": 48,
     "ppg": 18.3,
-    "mpg": 37.4
+    "mpg": 37.4,
+    "games_played": 79
   },
   {
     "id": "bc70a55a-cee0-478f-9a13-cf51c4a4187c",
@@ -637,7 +668,8 @@
     "steals": 40,
     "blocks": 26,
     "ppg": 18.7,
-    "mpg": 28.8
+    "mpg": 28.8,
+    "games_played": 41
   },
   {
     "id": "51b62fe8-1e5c-4c65-8ad3-2ad06e749b70",
@@ -657,7 +689,8 @@
     "steals": 99,
     "blocks": 24,
     "ppg": 21.5,
-    "mpg": 35.5
+    "mpg": 35.5,
+    "games_played": 66
   },
   {
     "id": "5e86a9c3-b4d0-4fe1-a551-acd83e5d60eb",
@@ -677,7 +710,8 @@
     "steals": 80,
     "blocks": 23,
     "ppg": 18.4,
-    "mpg": 31.2
+    "mpg": 31.2,
+    "games_played": 77
   },
   {
     "id": "00fb2704-aa25-4ef7-8972-cde454810810",
@@ -697,7 +731,8 @@
     "steals": 57,
     "blocks": 59,
     "ppg": 19.5,
-    "mpg": 28.2
+    "mpg": 28.2,
+    "games_played": 70
   },
   {
     "id": "0718c0e1-7804-471a-b4ed-cde778948d4d",
@@ -717,7 +752,8 @@
     "steals": 58,
     "blocks": 10,
     "ppg": 17,
-    "mpg": 32.4
+    "mpg": 32.4,
+    "games_played": 79
   },
   {
     "id": "cfc1e41b-74ab-45ee-8132-aaf9ca7f8163",
@@ -737,7 +773,8 @@
     "steals": 89,
     "blocks": 19,
     "ppg": 18.6,
-    "mpg": 31
+    "mpg": 31,
+    "games_played": 72
   },
   {
     "id": "775e4450-cdcd-43a1-b4cd-dc29fba48503",
@@ -757,7 +794,8 @@
     "steals": 66,
     "blocks": 44,
     "ppg": 20.2,
-    "mpg": 30.3
+    "mpg": 30.3,
+    "games_played": 65
   },
   {
     "id": "5cc51c05-06f5-4ae4-89a4-1d329fbbcdfb",
@@ -777,7 +815,8 @@
     "steals": 60,
     "blocks": 34,
     "ppg": 21,
-    "mpg": 29.7
+    "mpg": 29.7,
+    "games_played": 62
   },
   {
     "id": "e8def95a-cdf0-423f-9cac-a3e7e92364db",
@@ -797,7 +836,8 @@
     "steals": 110,
     "blocks": 31,
     "ppg": 17.3,
-    "mpg": 32.1
+    "mpg": 32.1,
+    "games_played": 74
   },
   {
     "id": "4a4459df-6307-4d10-b4cd-c69e9bf8b11d",
@@ -817,7 +857,8 @@
     "steals": 58,
     "blocks": 14,
     "ppg": 23.6,
-    "mpg": 33.1
+    "mpg": 33.1,
+    "games_played": 54
   },
   {
     "id": "9bcd5cff-4a1c-4454-89b6-a5899b0c6bcc",
@@ -837,7 +878,8 @@
     "steals": 88,
     "blocks": 98,
     "ppg": 16.5,
-    "mpg": 34.1
+    "mpg": 34.1,
+    "games_played": 77
   },
   {
     "id": "0afbe608-940a-4d5d-a1f7-468718c67d91",
@@ -857,7 +899,8 @@
     "steals": 72,
     "blocks": 35,
     "ppg": 20.9,
-    "mpg": 33.2
+    "mpg": 33.2,
+    "games_played": 60
   },
   {
     "id": "fe7a0b28-a8f9-42ad-b345-0f69d51d365f",
@@ -877,7 +920,8 @@
     "steals": 55,
     "blocks": 116,
     "ppg": 16.3,
-    "mpg": 29.2
+    "mpg": 29.2,
+    "games_played": 77
   },
   {
     "id": "293be24b-3a94-40b2-a7a4-a1dd788302e9",
@@ -897,7 +941,8 @@
     "steals": 56,
     "blocks": 71,
     "ppg": 15.8,
-    "mpg": 35.1
+    "mpg": 35.1,
+    "games_played": 77
   },
   {
     "id": "1bd4a869-80a3-47b7-bac9-789bda6e6e92",
@@ -917,7 +962,8 @@
     "steals": 107,
     "blocks": 39,
     "ppg": 16,
-    "mpg": 35
+    "mpg": 35,
+    "games_played": 75
   },
   {
     "id": "c4981f56-93a2-47b1-8d31-4e8635f45e1d",
@@ -937,7 +983,8 @@
     "steals": 56,
     "blocks": 20,
     "ppg": 23.3,
-    "mpg": 34.5
+    "mpg": 34.5,
+    "games_played": 51
   },
   {
     "id": "83cc5b28-36a7-43ba-ba20-8347bd1de583",
@@ -957,7 +1004,8 @@
     "steals": 107,
     "blocks": 62,
     "ppg": 14.4,
-    "mpg": 32.8
+    "mpg": 32.8,
+    "games_played": 82
   },
   {
     "id": "eb91a4c8-1a8a-46bf-86e6-e16950b67ef6",
@@ -977,7 +1025,8 @@
     "steals": 43,
     "blocks": 131,
     "ppg": 17.1,
-    "mpg": 28.9
+    "mpg": 28.9,
+    "games_played": 69
   },
   {
     "id": "d64b602e-45f2-4ba9-878b-0a4f7210ec77",
@@ -997,7 +1046,8 @@
     "steals": 48,
     "blocks": 113,
     "ppg": 18.2,
-    "mpg": 31.9
+    "mpg": 31.9,
+    "games_played": 65
   },
   {
     "id": "26ad516e-5b80-4d33-a40a-b0dfacbaa992",
@@ -1017,7 +1067,8 @@
     "steals": 97,
     "blocks": 30,
     "ppg": 14.3,
-    "mpg": 25.8
+    "mpg": 25.8,
+    "games_played": 82
   },
   {
     "id": "4b7ecb2a-ec19-4984-9472-92edf7e17acb",
@@ -1037,7 +1088,8 @@
     "steals": 51,
     "blocks": 21,
     "ppg": 15.4,
-    "mpg": 28.3
+    "mpg": 28.3,
+    "games_played": 75
   },
   {
     "id": "cb0b5991-53e4-4dce-bf95-215fd6ecf728",
@@ -1057,7 +1109,8 @@
     "steals": 92,
     "blocks": 5,
     "ppg": 16.4,
-    "mpg": 31.9
+    "mpg": 31.9,
+    "games_played": 70
   },
   {
     "id": "8ec91366-faea-4196-bbfd-b8fab7434795",
@@ -1077,7 +1130,8 @@
     "steals": 49,
     "blocks": 17,
     "ppg": 26.6,
-    "mpg": 30.9
+    "mpg": 30.9,
+    "games_played": 43
   },
   {
     "id": "ddee4a31-2791-4339-bfc3-a058ce2d1397",
@@ -1097,7 +1151,8 @@
     "steals": 78,
     "blocks": 19,
     "ppg": 16.7,
-    "mpg": 30
+    "mpg": 30,
+    "games_played": 68
   },
   {
     "id": "72a6489b-ad35-4f06-8a4f-a68ea1052f7b",
@@ -1117,7 +1172,8 @@
     "steals": 57,
     "blocks": 9,
     "ppg": 20.2,
-    "mpg": 30.4
+    "mpg": 30.4,
+    "games_played": 56
   },
   {
     "id": "a15f73b1-f757-4af2-b09a-f0185e09c8bf",
@@ -1137,7 +1193,8 @@
     "steals": 82,
     "blocks": 6,
     "ppg": 15.2,
-    "mpg": 29.5
+    "mpg": 29.5,
+    "games_played": 74
   },
   {
     "id": "70e50e53-ca3b-425d-ac49-b156d6d1e016",
@@ -1157,7 +1214,8 @@
     "steals": 82,
     "blocks": 79,
     "ppg": 15.2,
-    "mpg": 31
+    "mpg": 31,
+    "games_played": 74
   },
   {
     "id": "583d7994-36f9-4a9a-b527-c18704406981",
@@ -1177,7 +1235,8 @@
     "steals": 42,
     "blocks": 21,
     "ppg": 26.7,
-    "mpg": 34.4
+    "mpg": 34.4,
+    "games_played": 42
   },
   {
     "id": "9474fa0a-70dd-44c4-9751-dac5839ae7f3",
@@ -1197,7 +1256,8 @@
     "steals": 104,
     "blocks": 48,
     "ppg": 16.7,
-    "mpg": 33.2
+    "mpg": 33.2,
+    "games_played": 67
   },
   {
     "id": "af1ba5e5-3f34-4ada-aa9f-f818baf7706f",
@@ -1217,7 +1277,8 @@
     "steals": 122,
     "blocks": 54,
     "ppg": 13.5,
-    "mpg": 26.2
+    "mpg": 26.2,
+    "games_played": 82
   },
   {
     "id": "06df3766-f654-4fe3-8a37-496d21e7ea23",
@@ -1237,7 +1298,8 @@
     "steals": 94,
     "blocks": 35,
     "ppg": 13.4,
-    "mpg": 33.3
+    "mpg": 33.3,
+    "games_played": 82
   },
   {
     "id": "42c5f009-dfd2-4a94-a750-0943791e138e",
@@ -1257,7 +1319,8 @@
     "steals": 42,
     "blocks": 19,
     "ppg": 19.3,
-    "mpg": 30.3
+    "mpg": 30.3,
+    "games_played": 57
   },
   {
     "id": "aa5536d2-4d75-43fb-8df3-47fbf99d3b7c",
@@ -1277,7 +1340,8 @@
     "steals": 81,
     "blocks": 73,
     "ppg": 14.8,
-    "mpg": 31.7
+    "mpg": 31.7,
+    "games_played": 73
   },
   {
     "id": "190797ba-a6f4-4286-9d5e-d157ff834829",
@@ -1297,7 +1361,8 @@
     "steals": 46,
     "blocks": 11,
     "ppg": 13.2,
-    "mpg": 23.3
+    "mpg": 23.3,
+    "games_played": 82
   },
   {
     "id": "35cd1338-c56b-4247-b53c-264585c59883",
@@ -1317,7 +1382,8 @@
     "steals": 42,
     "blocks": 10,
     "ppg": 13.5,
-    "mpg": 26.6
+    "mpg": 26.6,
+    "games_played": 80
   },
   {
     "id": "823b2161-0c34-494c-9d7c-b438152f4f4d",
@@ -1337,7 +1403,8 @@
     "steals": 76,
     "blocks": 78,
     "ppg": 13.6,
-    "mpg": 26.1
+    "mpg": 26.1,
+    "games_played": 77
   },
   {
     "id": "77c425f0-0fce-4fab-bd1e-c915c8fb5bc7",
@@ -1357,7 +1424,8 @@
     "steals": 76,
     "blocks": 69,
     "ppg": 15.4,
-    "mpg": 30.3
+    "mpg": 30.3,
+    "games_played": 68
   },
   {
     "id": "f8a7e4c7-d60e-4751-9203-30a772dd9272",
@@ -1377,7 +1445,8 @@
     "steals": 24,
     "blocks": 6,
     "ppg": 14.4,
-    "mpg": 28.9
+    "mpg": 28.9,
+    "games_played": 24
   },
   {
     "id": "60b8026e-e154-4ed7-a247-8e4af1dbf668",
@@ -1397,7 +1466,8 @@
     "steals": 99,
     "blocks": 16,
     "ppg": 12.7,
-    "mpg": 28.5
+    "mpg": 28.5,
+    "games_played": 80
   },
   {
     "id": "9cfad453-b323-43dc-a066-6cd0a21745ad",
@@ -1417,7 +1487,8 @@
     "steals": 104,
     "blocks": 34,
     "ppg": 12.2,
-    "mpg": 30.4
+    "mpg": 30.4,
+    "games_played": 82
   },
   {
     "id": "c5fca05e-7292-464b-b9cd-d5d0f5e2fd07",
@@ -1437,7 +1508,8 @@
     "steals": 60,
     "blocks": 49,
     "ppg": 13.8,
-    "mpg": 27.6
+    "mpg": 27.6,
+    "games_played": 72
   },
   {
     "id": "6c60282d-165a-4cba-8e5a-4f2d9d4c5905",
@@ -1457,7 +1529,8 @@
     "steals": 34,
     "blocks": 24,
     "ppg": 27.6,
-    "mpg": 28.9
+    "mpg": 28.9,
+    "games_played": 36
   },
   {
     "id": "74a45eed-f2b0-4886-ae71-d04cf7d59528",
@@ -1477,7 +1550,8 @@
     "steals": 83,
     "blocks": 12,
     "ppg": 15.2,
-    "mpg": 29
+    "mpg": 29,
+    "games_played": 64
   },
   {
     "id": "02acc094-76ab-4b3e-b51d-a351a9bab6b9",
@@ -1497,7 +1571,8 @@
     "steals": 51,
     "blocks": 8,
     "ppg": 16.9,
-    "mpg": 31.3
+    "mpg": 31.3,
+    "games_played": 57
   },
   {
     "id": "7366b2b7-5959-4dd9-9204-760e861b3119",
@@ -1517,7 +1592,8 @@
     "steals": 7,
     "blocks": 10,
     "ppg": 9.7,
-    "mpg": 21.1
+    "mpg": 21.1,
+    "games_played": 16
   },
   {
     "id": "3f98b652-71d4-4a40-949d-41c33dddd15d",
@@ -1537,7 +1613,8 @@
     "steals": 26,
     "blocks": 9,
     "ppg": 17.4,
-    "mpg": 28
+    "mpg": 28,
+    "games_played": 26
   },
   {
     "id": "a4de5912-bd72-4993-ac93-fb65d2164660",
@@ -1557,7 +1634,8 @@
     "steals": 84,
     "blocks": 74,
     "ppg": 11.7,
-    "mpg": 25
+    "mpg": 25,
+    "games_played": 81
   },
   {
     "id": "e872cdaf-5d04-45c2-bbfe-d673f3fb26ce",
@@ -1577,7 +1655,8 @@
     "steals": 47,
     "blocks": 27,
     "ppg": 12.3,
-    "mpg": 29.1
+    "mpg": 29.1,
+    "games_played": 77
   },
   {
     "id": "18d35316-9f40-408c-abcc-ab49e06ef8e8",
@@ -1597,7 +1676,8 @@
     "steals": 44,
     "blocks": 22,
     "ppg": 12.2,
-    "mpg": 27.4
+    "mpg": 27.4,
+    "games_played": 77
   },
   {
     "id": "28a2e698-9f33-4d4d-9a5d-9bea66ee42a1",
@@ -1617,7 +1697,8 @@
     "steals": 60,
     "blocks": 51,
     "ppg": 13.6,
-    "mpg": 27.1
+    "mpg": 27.1,
+    "games_played": 69
   },
   {
     "id": "c76e8dae-58ad-4950-8929-5094036210c4",
@@ -1637,7 +1718,8 @@
     "steals": 44,
     "blocks": 130,
     "ppg": 12.1,
-    "mpg": 27.2
+    "mpg": 27.2,
+    "games_played": 77
   },
   {
     "id": "3e492a6a-ed3c-499d-b3f5-ff68ca16f6fd",
@@ -1657,7 +1739,8 @@
     "steals": 6,
     "blocks": 1,
     "ppg": 22.3,
-    "mpg": 24
+    "mpg": 24,
+    "games_played": 3
   },
   {
     "id": "744d5db7-b0be-474a-a58b-6ddf7ae35567",
@@ -1677,7 +1760,8 @@
     "steals": 60,
     "blocks": 49,
     "ppg": 11.8,
-    "mpg": 29.3
+    "mpg": 29.3,
+    "games_played": 78
   },
   {
     "id": "e783937f-31dc-41bd-9510-2572d2dc35ee",
@@ -1697,7 +1781,8 @@
     "steals": 38,
     "blocks": 39,
     "ppg": 12.5,
-    "mpg": 26.5
+    "mpg": 26.5,
+    "games_played": 74
   },
   {
     "id": "66ea876a-1cc9-47ed-ae31-2ed3c8f9350e",
@@ -1717,7 +1802,8 @@
     "steals": 55,
     "blocks": 27,
     "ppg": 17,
-    "mpg": 32.1
+    "mpg": 32.1,
+    "games_played": 54
   },
   {
     "id": "68b7aac9-02fd-4bd8-b10c-6702d2c5eb98",
@@ -1737,7 +1823,8 @@
     "steals": 41,
     "blocks": 12,
     "ppg": 13.7,
-    "mpg": 24.2
+    "mpg": 24.2,
+    "games_played": 67
   },
   {
     "id": "2d4ce4bc-b03a-40bc-b22c-dab27591a429",
@@ -1757,7 +1844,8 @@
     "steals": 76,
     "blocks": 11,
     "ppg": 14.1,
-    "mpg": 27
+    "mpg": 27,
+    "games_played": 65
   },
   {
     "id": "fa0e2b60-8ee9-4db6-b9bc-d0e23d6b29d2",
@@ -1777,7 +1865,8 @@
     "steals": 62,
     "blocks": 38,
     "ppg": 11.1,
-    "mpg": 27.6
+    "mpg": 27.6,
+    "games_played": 82
   },
   {
     "id": "358fb074-ac1b-45a6-bf54-46c30534786e",
@@ -1797,7 +1886,8 @@
     "steals": 149,
     "blocks": 31,
     "ppg": 11.9,
-    "mpg": 33.2
+    "mpg": 33.2,
+    "games_played": 76
   },
   {
     "id": "7ca4beac-bbd6-454f-b820-4e8442a3e1e5",
@@ -1817,7 +1907,8 @@
     "steals": 41,
     "blocks": 70,
     "ppg": 12.5,
-    "mpg": 27.2
+    "mpg": 27.2,
+    "games_played": 72
   },
   {
     "id": "c910f29a-3f6b-4dba-92e9-20137fbdf2c7",
@@ -1837,7 +1928,8 @@
     "steals": 64,
     "blocks": 41,
     "ppg": 11.2,
-    "mpg": 21.9
+    "mpg": 21.9,
+    "games_played": 80
   },
   {
     "id": "71b57f97-2ddd-4593-8111-c637e2b58ff8",
@@ -1857,7 +1949,8 @@
     "steals": 73,
     "blocks": 39,
     "ppg": 11.4,
-    "mpg": 23.4
+    "mpg": 23.4,
+    "games_played": 77
   },
   {
     "id": "28f3e566-3174-4e87-81d0-4889569b6ef5",
@@ -1877,7 +1970,8 @@
     "steals": 52,
     "blocks": 17,
     "ppg": 10.7,
-    "mpg": 27.7
+    "mpg": 27.7,
+    "games_played": 82
   },
   {
     "id": "90b52759-3f0e-4d93-b5ca-fcb53afce857",
@@ -1897,7 +1991,8 @@
     "steals": 54,
     "blocks": 28,
     "ppg": 13.2,
-    "mpg": 26.9
+    "mpg": 26.9,
+    "games_played": 66
   },
   {
     "id": "a3fff5c7-19b6-4dac-bd75-11b944bea505",
@@ -1917,7 +2012,8 @@
     "steals": 55,
     "blocks": 47,
     "ppg": 15.4,
-    "mpg": 27.1
+    "mpg": 27.1,
+    "games_played": 56
   },
   {
     "id": "f1e4fcb7-01c7-479f-8883-c33ac438690e",
@@ -1937,7 +2033,8 @@
     "steals": 59,
     "blocks": 84,
     "ppg": 11.1,
-    "mpg": 22.1
+    "mpg": 22.1,
+    "games_played": 77
   },
   {
     "id": "323f9ef8-ecdd-41a7-859e-dd3db48ba913",
@@ -1957,7 +2054,8 @@
     "steals": 50,
     "blocks": 115,
     "ppg": 11.9,
-    "mpg": 26.9
+    "mpg": 26.9,
+    "games_played": 71
   },
   {
     "id": "37fbc3a5-0d10-4e22-803b-baa2ea0cdb12",
@@ -1977,7 +2075,8 @@
     "steals": 58,
     "blocks": 124,
     "ppg": 10.9,
-    "mpg": 31.3
+    "mpg": 31.3,
+    "games_played": 76
   },
   {
     "id": "288519dc-eae8-4daf-afa4-c86322b7460e",
@@ -1997,6 +2096,7 @@
     "steals": 45,
     "blocks": 77,
     "ppg": 11.7,
-    "mpg": 27.8
+    "mpg": 27.8,
+    "games_played": 69
   }
 ]
