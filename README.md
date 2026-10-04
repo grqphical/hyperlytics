@@ -1,4 +1,12 @@
-# Non-Euclidean Sports Analytics (name pending)
+# Hyperlytics
+A non-euclidean sports data visualization web app. It compares NBA and NHL players across three primary categories:
+- Offense
+- Defense
+- Physicality
+
+Each of these categories take stats from the individual sports and combines them into a percentile, comparing that players skills to the rest
+of the players in our dataset. We then take these percentages and plot them as points on a 3D, non-Euclidean space using a Poincaré Ball. You
+also are able to compare players stats directly head-to-head, allowing for more in-depth analysis.
 
 ## To Launch
 First time:
@@ -25,3 +33,6 @@ cd frontend
 npm install # first-time only
 npm run dev
 ```
+
+## License
+hyperlytics is licensed under the MIT License
