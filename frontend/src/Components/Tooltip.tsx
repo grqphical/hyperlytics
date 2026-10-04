@@ -44,7 +44,7 @@ export default function Tooltip({ player }: Props) {
     return (
         <div className="z-50 text-white max-w-90 p-4 bg-slate-800 rounded-md">
             <h1 className="text-lg font-bold">{player.name}</h1>
-            <p className="text-sm">{player.sport} &#x2022; Age: {player.age} &#x2022; {formatInches(player.height_in)} &#x2022; {player.weight_lbs} lbs</p>
+            <p className="text-sm">{player.sport[0].toUpperCase() + player.sport.substring(1)} &#x2022; Age: {player.age} &#x2022; {formatInches(player.height_in)} &#x2022; {player.weight_lbs} lbs</p>
             <div className="grid grid-cols-3 gap-2 mt-3">
                 <div className="flex flex-col items-center">
                     <div className={`p-2 ${percentageBackground(player.offense_pct)} text-white aspect-square flex items-center justify-center w-16 h-16`}>
