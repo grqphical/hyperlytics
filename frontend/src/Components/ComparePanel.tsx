@@ -42,7 +42,6 @@ export default function ComparePanel({ player, enabled, onSwap, onClear }: Props
     return (
         <Panel
             title="Comparison player"
-            actions={<span className="text-[11px] text-slate-400">{player.sport}</span>}
         >
             <h3 className="text-base font-semibold leading-tight text-white">{player.name}</h3>
 

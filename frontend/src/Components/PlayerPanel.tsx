@@ -24,7 +24,6 @@ export default function PlayerPanel({ player, recenterOnClick, onRecenterOnClick
     return (
         <Panel
             title="Active player"
-            actions={<span className="text-[11px] text-slate-400">{player.sport}</span>}
         >
             {/* The recenter lock lives with the active player rather than in the
                 view controls, so the control that owns the selection also owns
@@ -38,11 +37,10 @@ export default function PlayerPanel({ player, recenterOnClick, onRecenterOnClick
                         ? "Clicking a point re-centres the view on it"
                         : "Clicking a point leaves the view where it is"
                 }
-                className={`w-full rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 ${
-                    recenterOnClick
+                className={`w-full rounded-md border px-3 py-1.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 ${recenterOnClick
                         ? "border-sky-400/60 bg-sky-400/20 text-sky-100 hover:bg-sky-400/30"
                         : "border-white/20 bg-slate-800 text-slate-300 hover:bg-slate-700"
-                }`}
+                    }`}
             >
                 {recenterOnClick ? "Unlocked" : "Locked"}
                 <span className="ml-1.5 font-normal opacity-80">
