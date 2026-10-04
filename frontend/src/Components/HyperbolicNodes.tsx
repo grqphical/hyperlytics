@@ -7,6 +7,7 @@ import {
     applyToBall, translateBall, focusStep, viewOffset,
 } from "../hyperbolic";
 import { PointLayers } from "./PointLayers";
+import type { Athlete } from "../models";
 
 /** Imperative handle for the surrounding UI (reset button, tooltips, ...). */
 export interface HyperbolicViewApi {
@@ -19,10 +20,7 @@ export interface HyperbolicViewApi {
 }
 
 interface Props {
-    positions: Vec3[];        // base Poincare ball coordinates from the backend
-    isHockey: boolean[];    // same length as positions
-    /** Per-node size drivers as 0-1 floats (e.g. games played share); same length as positions. */
-    sizes?: number[];
+    players: Athlete[] | null
     nodeScale?: number;       // sphere size at the center of the view
     radius?: number;
     /** Populated with the imperative handle; see HyperbolicViewApi. */
@@ -39,17 +37,18 @@ const FOCUS_DURATION = 0.8;
 /** Size multiplier range for the `sizes` driver, so the biggest node stays clickable. */
 const SIZE_MIN = 0.3;
 const SIZE_MAX = 1.0
-function sizeMultiplier(sizes: number[] | undefined, index: number): number {
-    const s = sizes?.[index];
+function sizeMultiplier(players: Athlete[] | null, index: number): number {
+    if (players === null) {
+        return 0.0
+    }
+    const s = players[index].games_played_pct;
     if (s === undefined) return 1;
     const clamped = Math.min(1, Math.max(0, s));
     return SIZE_MIN + clamped * (SIZE_MAX - SIZE_MIN);
 }
 
 export default function HyperbolicNodes({
-    positions,
-    isHockey,
-    sizes,
+    players,
     nodeScale = 0.05,
     radius = 1,
     apiRef,
@@ -58,14 +57,18 @@ export default function HyperbolicNodes({
 }: Props) {
     const { gl, camera } = useThree();
 
+    if (players === null) {
+        return;
+    }
+
     const view = useRef<Mat4>(identity());
-    const hyper = useMemo(() => positions.map(ballToHyperboloid), [positions]);
+    const hyper = useMemo(() => players.map((player) => ballToHyperboloid([player.x, player.y, player.z])), [players]);
     const states = useMemo(
         () =>
-            positions.map(() => ({
+            players.map(() => ({
                 current: { position: [0, 0, 0], rotation: [0, 0, 0], scale: 1 } as PointState,
             })),
-        [positions]
+        [players]
     );
 
     const anim = useRef<{ start: Mat4; target: Vec3; t: number; dur: number } | null>(null);
@@ -239,8 +242,8 @@ export default function HyperbolicNodes({
                     <Point
                         key={i}
                         state={state}
-                        scale={nodeScale * radius * sizeMultiplier(sizes, i)}
-                        isHockey={isHockey[i] ?? false}
+                        scale={nodeScale * radius * sizeMultiplier(players, i)}
+                        isHockey={players[i].sport === "hockey"}
                         onClick={(e) => onSelect(i, e)}
                     />
                 ))}
