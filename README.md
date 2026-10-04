@@ -9,7 +9,7 @@ of the players in our dataset. We then take these percentages and plot them as p
 also are able to compare players stats directly head-to-head, allowing for more in-depth analysis.
 
 ## Demo
-![](assets/hyperlytics_final_demo.mp4)
+https://github.com/user-attachments/assets/4f7eef9e-72da-4323-bde6-1c2b9e4d7a93
 
 ## To Launch
 First time:
