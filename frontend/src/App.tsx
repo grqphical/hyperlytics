@@ -154,6 +154,9 @@ export default function App() {
     const reset = useCallback(() => {
         view.current?.reset();
         clearSelection();
+        // A reset returns the view to the league average, so the recenter lock
+        // goes back to its default: clicks fly points to the centre again.
+        setRecenterOnClick(true);
     }, [clearSelection]);
 
     // Keyboard equivalents for the pointer gestures, so the view can be driven
