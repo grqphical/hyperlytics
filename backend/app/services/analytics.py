@@ -8,32 +8,54 @@ from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.models import Player
 
+from app.services.projection import to_poincare_ball
+
 
 class Stat(NamedTuple):
     key: str                        # key inside raw_stats
-    per_36: bool = False            # season total -> per-36-minute rate
+    as_rate: bool = False           # divide the season total by playing time
     higher_is_better: bool = True   # False for stats like errors
 
 
 class SportConfig(NamedTuple):
-    minutes_key: str
-    min_minutes: float              # drop low-minute players (noisy rates)
+    volume_key: str                 # playing-time column in raw_stats
+    min_volume: float               # drop players below this (rates are noisy)
+    rate_scale: float               # 36 = per 36 minutes, 1 = per game
     offense: list[Stat]
     defense: list[Stat]
 
 
 SPORTS = {
     "basketball": SportConfig(
-        minutes_key="minutes",
-        min_minutes=500,
-        offense=[Stat("points", per_36=True), Stat("effective_fg_pct"), Stat("assists", per_36=True)],
+        volume_key="minutes",
+        min_volume=500,
+        rate_scale=36,
+        offense=[
+            Stat("points", as_rate=True),
+            Stat("effective_fg_pct"),
+            Stat("assists", as_rate=True),
+        ],
         defense=[
-            Stat("defensive_rebounds", per_36=True),
-            Stat("steals", per_36=True),
-            Stat("blocks", per_36=True),
+            Stat("defensive_rebounds", as_rate=True),
+            Stat("steals", as_rate=True),
+            Stat("blocks", as_rate=True),
         ],
     ),
-    # "baseball": add once we have the baseball keys
+    "hockey": SportConfig(
+        volume_key="games_played",
+        min_volume=20,
+        rate_scale=1,
+        offense=[
+            Stat("goals", as_rate=True),
+            Stat("assists", as_rate=True),
+            Stat("shots", as_rate=True),
+        ],
+        defense=[
+            Stat("shot_blocks", as_rate=True),
+            Stat("hits", as_rate=True),
+            Stat("takeaways", as_rate=True),
+        ],
+    ),
 }
 
 
@@ -52,13 +74,15 @@ def percentile(s: pd.Series) -> pd.Series:
     return s.rank(pct=True) * 100
 
 
-def composite_score(df: pd.DataFrame, stats: list[Stat], minutes: pd.Series) -> pd.Series:
+def composite_score(
+    df: pd.DataFrame, stats: list[Stat], volume: pd.Series, rate_scale: float
+) -> pd.Series:
     """Z-score each stat, flip the sign where lower is better, then average them."""
     zs = []
     for stat in stats:
         values = pd.to_numeric(df[stat.key], errors="coerce")
-        if stat.per_36:
-            values = values / minutes * 36
+        if stat.as_rate:
+            values = values / volume * rate_scale
         z = zscore(values)
         zs.append(z if stat.higher_is_better else -z)
     return pd.concat(zs, axis=1).mean(axis=1)
@@ -75,7 +99,7 @@ def load_players(db: Session, sport: str, season: int):
         return players, pd.DataFrame()
 
     index = [p.id for p in players]
-    stats = pd.json_normalize([p.raw_stats or {} for p in players])  # flattens nested keys too
+    stats = pd.json_normalize([p.raw_stats or {} for p in players])
     stats.index = index
     body = pd.DataFrame(
         {
@@ -110,14 +134,15 @@ def compute_sport(db: Session, sport: str, season: int) -> int:
     if df.empty:
         return 0
 
-    minutes = pd.to_numeric(df[cfg.minutes_key], errors="coerce")
-    qualified = df[minutes >= cfg.min_minutes]
+    volume = pd.to_numeric(df[cfg.volume_key], errors="coerce")
+    qualified = df[volume >= cfg.min_volume]
+    q_volume = volume[qualified.index]
 
     out = pd.DataFrame(index=df.index)
 
-    # X and Y: only players with enough minutes
-    out["offense_score"] = composite_score(qualified, cfg.offense, minutes[qualified.index])
-    out["defense_score"] = composite_score(qualified, cfg.defense, minutes[qualified.index])
+    # X and Y: only players with enough playing time
+    out["offense_score"] = composite_score(qualified, cfg.offense, q_volume, cfg.rate_scale)
+    out["defense_score"] = composite_score(qualified, cfg.defense, q_volume, cfg.rate_scale)
 
     # Z: physical anomaly = average of height and weight z-scores (all players)
     height = pd.to_numeric(df["height_in"], errors="coerce")
@@ -126,6 +151,17 @@ def compute_sport(db: Session, sport: str, season: int) -> int:
 
     for name in ("offense", "defense", "physical"):
         out[f"{name}_pct"] = percentile(out[f"{name}_score"])
+
+    # Project the three standardized scores into hyperbolic space (Poincare ball)
+    standardized = pd.concat(
+        [
+            zscore(out["offense_score"]),
+            zscore(out["defense_score"]),
+            zscore(out["physical_score"]),
+        ],
+        axis=1,
+    )
+    out = out.join(to_poincare_ball(standardized))
 
     save_results(db, players, out)
     return len(players)

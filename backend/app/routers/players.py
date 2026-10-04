@@ -31,7 +31,7 @@ class PlayerOut(BaseModel):
 
 @router.get("", response_model=list[PlayerOut])
 def list_players(
-    sport: Literal["basketball", "baseball"],
+    sport: Literal["basketball", "hockey"],
     season: int | None = None,
     limit: int = Query(500, ge=1, le=2000),
     db: Session = Depends(get_db),

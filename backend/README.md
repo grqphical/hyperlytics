@@ -15,13 +15,14 @@ cp .env.example .env               # first time only
 
 ## Load the data
 
-Put `basketball.json` and `baseball.json` in `data/`, then seed the database:
+Put `basketball.json` and `hockey.json` in `data/`, then seed the database:
 
 ```bash
+rm data/sports.db
 python -m app.scripts.seed
 ```
 
-## Analyze the data'
+## Analyze the data
 
 ```bash
 python -m app.scripts.compute

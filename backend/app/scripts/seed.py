@@ -7,7 +7,7 @@ from app.models import Player
 
 DATA_FILES = [
     Path("data/basketball.json"),
-    Path("data/baseball.json"),
+    Path("data/hockey.json"),
 ]
 
 # Keys that map to real columns. Everything else goes into raw_stats.
