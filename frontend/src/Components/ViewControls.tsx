@@ -1,11 +1,7 @@
-import { useId } from "react";
 import Panel from "./Panel";
 import Kbd from "./Kbd";
 
 interface Props {
-    /** Re-centres the view on a clicked point. */
-    recenterOnClick: boolean;
-    onRecenterOnClickChange: (value: boolean) => void;
     onReset: () => void;
 }
 
@@ -14,9 +10,7 @@ const SHORTCUTS: { keys: string[]; action: string }[] = [
     { keys: ["Esc"], action: "Clear selection" },
 ];
 
-export default function ViewControls({ recenterOnClick, onRecenterOnClickChange, onReset }: Props) {
-    const toggleId = useId();
-
+export default function ViewControls({ onReset }: Props) {
     return (
         <Panel title="View controls">
             <button
@@ -26,28 +20,6 @@ export default function ViewControls({ recenterOnClick, onRecenterOnClickChange,
             >
                 Reset view
             </button>
-
-            <div className="mt-2 flex gap-2">
-                <input
-                    id={toggleId}
-                    type="checkbox"
-                    checked={recenterOnClick}
-                    onChange={(e) => onRecenterOnClickChange(e.target.checked)}
-                    aria-describedby={`${toggleId}-help`}
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer accent-sky-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-                />
-                <div className="min-w-0">
-                    <label
-                        htmlFor={toggleId}
-                        className="cursor-pointer text-xs font-medium text-slate-100"
-                    >
-                        Auto re-center
-                    </label>
-                    <p id={`${toggleId}-help`} className="mt-0.5 text-[11px] leading-snug text-slate-400">
-                        When on, clicking a point moves that player to the centre of the view.
-                    </p>
-                </div>
-            </div>
 
             <h3 className="mt-3 text-xs font-semibold text-slate-200">Keyboard shortcuts</h3>
             <ul className="mt-1.5 space-y-1">
