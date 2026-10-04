@@ -29,6 +29,8 @@ interface Props {
     onSelect?: (index: number) => void;
     /** Seconds for the click-to-focus animation. */
     focusDuration?: number;
+    /** When false, clicking a node only selects it; the view stays put. */
+    recenterOnClick?: boolean;
 }
 
 const MAX_R = 0.95;          // clamp cursor hits so we never grab "infinity"
@@ -54,6 +56,7 @@ export default function HyperbolicNodes({
     apiRef,
     onSelect: onSelectNode,
     focusDuration = FOCUS_DURATION,
+    recenterOnClick = true,
 }: Props) {
     const { gl, camera } = useThree();
 
@@ -205,10 +208,12 @@ export default function HyperbolicNodes({
             const d = downPx.current;
             if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > DRAG_SLOP_PX) return;
             e.stopPropagation();
-            focusOn(index);
+            // Selection is independent of recentering, so the tooltip still
+            // updates when recentering is paused.
+            if (recenterOnClick) focusOn(index);
             onSelectNode?.(index);
         },
-        [focusOn, onSelectNode]
+        [focusOn, onSelectNode, recenterOnClick]
     );
 
     // --- Per-frame update ---

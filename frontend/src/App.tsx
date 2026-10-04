@@ -54,6 +54,7 @@ export default function App() {
 
     const view = useRef<HyperbolicViewApi>(null);
     const [player, setPlayer] = useState<PlayerData | null>(null);
+    const [recenterOnClick, setRecenterOnClick] = useState(true);
 
     const onSelect = useCallback((index: number) => {
         setPlayer(players?.[index] ?? null);
@@ -88,6 +89,7 @@ export default function App() {
                     radius={POINCARE_RADIUS}
                     apiRef={view}
                     onSelect={onSelect}
+                    recenterOnClick={recenterOnClick}
                 />
                 <BoundaryAxes radius={POINCARE_RADIUS} view={view} />
 
@@ -104,6 +106,15 @@ export default function App() {
                 >
                     Reset view
                 </button>
+                <label className="flex cursor-pointer items-center gap-1.5 rounded-md border border-white/20 bg-slate-800/80 px-3 py-1.5 text-xs font-medium text-white backdrop-blur">
+                    <input
+                        type="checkbox"
+                        checked={recenterOnClick}
+                        onChange={(e) => setRecenterOnClick(e.target.checked)}
+                        className="h-3 w-3 cursor-pointer accent-sky-400"
+                    />
+                    Auto re-center
+                </label>
                 <p className="max-w-52 text-right text-[11px] leading-snug text-slate-400">
                     Hold right-click to pan &middot; click a player to re-center
                 </p>
